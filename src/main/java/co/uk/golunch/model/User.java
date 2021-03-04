@@ -1,36 +1,75 @@
 package co.uk.golunch.model;
 
+import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
+        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=:email"),
+        @NamedQuery(name = User.ALL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles")
+})
+@Entity
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractBaseEntity {
+
+    public static final String DELETE = "User.delete";
+    public static final String BY_EMAIL = "User.getByEmail";
+    public static final String ALL = "User.getAll";
+
+    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Size(max = 100)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 100)
     private String password;
-    private boolean enabled = true;
+
+    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
+    @NotNull
     private Date registered = new Date();
+
+    @Column(name = "voted")
+    private Date voted;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique_idx")})
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
 
-    public User(){
+    public User() {
     }
 
-    public User(String email, String password, boolean enabled, Date registered, Set<Role> roles) {
-        this.email = email;
-        this.password = password;
-        this.enabled = enabled;
-        this.registered = registered;
-        this.roles = roles;
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, new Date(), EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, Date registered, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
-        this.enabled = enabled;
         this.registered = registered;
-        this.roles = roles;
+        setRoles(roles);
     }
-
 
     public String getEmail() {
         return email;
@@ -48,14 +87,6 @@ public class User extends AbstractBaseEntity {
         this.password = password;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public Date getRegistered() {
         return registered;
     }
@@ -68,7 +99,32 @@ public class User extends AbstractBaseEntity {
         return roles;
     }
 
-//    public void setRoles(Collection<Role> roles) {
-//        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
-//    }
+    public Date getVoted() {
+        return voted;
+    }
+
+    public void setVoted(Date voted) {
+        this.voted = voted;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    public int id() {
+        Assert.notNull(id, "Entity must have id");
+        return id;
+    }
+
+    public boolean isNew() {
+        return this.id == null;
+    }
 }
