@@ -789,7 +789,7 @@ false Zulu
     <database id="2" parent="1" name="golunch">
       <ObjectId>20604</ObjectId>
       <Owner>user</Owner>
-      <IntrospectionStateNumber>4399</IntrospectionStateNumber>
+      <IntrospectionStateNumber>9591</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -877,7 +877,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>4400</IntrospectionStateNumber>
+      <IntrospectionStateNumber>9592</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="2" name="plpgsql">
@@ -978,66 +978,66 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="32" parent="19" name="global_seq">
-      <ObjectId>20629</ObjectId>
+      <ObjectId>30319</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>4392</StateNumber>
+      <StateNumber>9586</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <table id="33" parent="19" name="restaurant_menu">
-      <ObjectId>20642</ObjectId>
+      <ObjectId>30332</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>4394</StateNumber>
+      <StateNumber>9565</StateNumber>
     </table>
     <table id="34" parent="19" name="restaurant_votes">
-      <ObjectId>20669</ObjectId>
+      <ObjectId>30359</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>4397</StateNumber>
+      <StateNumber>9568</StateNumber>
     </table>
     <table id="35" parent="19" name="restaurants">
-      <ObjectId>20631</ObjectId>
+      <ObjectId>30321</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>4394</StateNumber>
+      <StateNumber>9565</StateNumber>
     </table>
     <table id="36" parent="19" name="user_roles">
-      <ObjectId>20684</ObjectId>
+      <ObjectId>30375</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>4398</StateNumber>
+      <StateNumber>9570</StateNumber>
     </table>
     <table id="37" parent="19" name="users">
-      <ObjectId>20653</ObjectId>
+      <ObjectId>30343</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
     </table>
     <column id="38" parent="33" name="restaurant_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4394</StateNumber>
+      <StateNumber>9565</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="39" parent="33" name="item_map_key">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4394</StateNumber>
+      <StateNumber>9565</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="40" parent="33" name="price_map_value">
       <Position>3</Position>
       <DataType>numeric|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4394</StateNumber>
+      <StateNumber>9565</StateNumber>
       <TypeId>1700</TypeId>
     </column>
     <foreign-key id="41" parent="33" name="restaurant_menu_restaurant_id_fkey">
-      <ObjectId>20648</ObjectId>
-      <StateNumber>4394</StateNumber>
+      <ObjectId>30338</ObjectId>
+      <StateNumber>9565</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>20631</RefTableId>
+      <RefTableId>30321</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>
@@ -1048,18 +1048,18 @@ UC/10
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4397</StateNumber>
+      <StateNumber>9568</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="43" parent="34" name="voted_user_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>4397</StateNumber>
+      <StateNumber>9568</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="44" parent="34" name="user_votes_idx">
-      <ObjectId>20672</ObjectId>
-      <StateNumber>4397</StateNumber>
+    <index id="44" parent="34" name="restaurant_user_unique_idx">
+      <ObjectId>30374</ObjectId>
+      <StateNumber>9569</StateNumber>
       <ColNames>restaurant_id
 voted_user_id</ColNames>
       <Unique>1</Unique>
@@ -1067,53 +1067,63 @@ voted_user_id</ColNames>
       <CollationIds>0,0</CollationIds>
       <ClassIds>1978,1978</ClassIds>
     </index>
-    <key id="45" parent="34" name="user_votes_idx">
-      <ObjectId>20673</ObjectId>
-      <StateNumber>4397</StateNumber>
+    <index id="45" parent="34" name="user_votes_idx">
+      <ObjectId>30362</ObjectId>
+      <StateNumber>9568</StateNumber>
+      <ColNames>restaurant_id
+voted_user_id</ColNames>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0,0</CollationIds>
+      <ClassIds>1978,1978</ClassIds>
+    </index>
+    <key id="46" parent="34" name="user_votes_idx">
+      <ObjectId>30363</ObjectId>
+      <StateNumber>9568</StateNumber>
       <ColNames>restaurant_id
 voted_user_id</ColNames>
       <UnderlyingIndexName>user_votes_idx</UnderlyingIndexName>
     </key>
-    <foreign-key id="46" parent="34" name="restaurant_votes_restaurant_id_fkey">
-      <ObjectId>20674</ObjectId>
-      <StateNumber>4397</StateNumber>
+    <foreign-key id="47" parent="34" name="restaurant_votes_restaurant_id_fkey">
+      <ObjectId>30364</ObjectId>
+      <StateNumber>9568</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>20631</RefTableId>
+      <RefTableId>30321</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="47" parent="34" name="restaurant_votes_voted_user_id_fkey">
-      <ObjectId>20679</ObjectId>
-      <StateNumber>4397</StateNumber>
+    <foreign-key id="48" parent="34" name="restaurant_votes_voted_user_id_fkey">
+      <ObjectId>30369</ObjectId>
+      <StateNumber>9568</StateNumber>
       <ColNames>voted_user_id</ColNames>
-      <RefTableId>20653</RefTableId>
+      <RefTableId>30343</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>users</RefTableName>
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="48" parent="35" name="id">
+    <column id="49" parent="35" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4393</StateNumber>
+      <StateNumber>9564</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="49" parent="35" name="name">
+    <column id="50" parent="35" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4393</StateNumber>
+      <StateNumber>9564</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="50" parent="35" name="restaurants_pkey">
-      <ObjectId>20638</ObjectId>
-      <StateNumber>4393</StateNumber>
+    <index id="51" parent="35" name="restaurants_pkey">
+      <ObjectId>30328</ObjectId>
+      <StateNumber>9564</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1121,9 +1131,9 @@ voted_user_id</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="51" parent="35" name="restaurant_name_idx">
-      <ObjectId>20640</ObjectId>
-      <StateNumber>4393</StateNumber>
+    <index id="52" parent="35" name="restaurant_name_idx">
+      <ObjectId>30330</ObjectId>
+      <StateNumber>9564</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1131,35 +1141,35 @@ voted_user_id</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="52" parent="35" name="restaurants_pkey">
-      <ObjectId>20639</ObjectId>
-      <StateNumber>4393</StateNumber>
+    <key id="53" parent="35" name="restaurants_pkey">
+      <ObjectId>30329</ObjectId>
+      <StateNumber>9564</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>restaurants_pkey</UnderlyingIndexName>
     </key>
-    <key id="53" parent="35" name="restaurant_name_idx">
-      <ObjectId>20641</ObjectId>
-      <StateNumber>4393</StateNumber>
+    <key id="54" parent="35" name="restaurant_name_idx">
+      <ObjectId>30331</ObjectId>
+      <StateNumber>9564</StateNumber>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>restaurant_name_idx</UnderlyingIndexName>
     </key>
-    <column id="54" parent="36" name="user_id">
+    <column id="55" parent="36" name="user_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4398</StateNumber>
+      <StateNumber>9570</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="55" parent="36" name="role">
+    <column id="56" parent="36" name="role">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
-      <StateNumber>4398</StateNumber>
+      <StateNumber>9570</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="56" parent="36" name="user_roles_idx">
-      <ObjectId>20690</ObjectId>
-      <StateNumber>4398</StateNumber>
+    <index id="57" parent="36" name="user_roles_idx">
+      <ObjectId>30381</ObjectId>
+      <StateNumber>9570</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <Unique>1</Unique>
@@ -1168,76 +1178,76 @@ role</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>1978,3126</ClassIds>
     </index>
-    <key id="57" parent="36" name="user_roles_idx">
-      <ObjectId>20691</ObjectId>
-      <StateNumber>4398</StateNumber>
+    <key id="58" parent="36" name="user_roles_idx">
+      <ObjectId>30382</ObjectId>
+      <StateNumber>9570</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <UnderlyingIndexName>user_roles_idx</UnderlyingIndexName>
     </key>
-    <foreign-key id="58" parent="36" name="user_roles_user_id_fkey">
-      <ObjectId>20692</ObjectId>
-      <StateNumber>4398</StateNumber>
+    <foreign-key id="59" parent="36" name="user_roles_user_id_fkey">
+      <ObjectId>30383</ObjectId>
+      <StateNumber>9570</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>20653</RefTableId>
+      <RefTableId>30343</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>users</RefTableName>
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="59" parent="37" name="id">
+    <column id="60" parent="37" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="60" parent="37" name="name">
+    <column id="61" parent="37" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="61" parent="37" name="email">
+    <column id="62" parent="37" name="email">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="62" parent="37" name="password">
+    <column id="63" parent="37" name="password">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="63" parent="37" name="registered">
+    <column id="64" parent="37" name="registered">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <column id="64" parent="37" name="voted">
+    <column id="65" parent="37" name="voted">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="65" parent="37" name="restaurant_id">
+    <column id="66" parent="37" name="restaurant_id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>4395</StateNumber>
+      <StateNumber>9566</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="66" parent="37" name="users_pkey">
-      <ObjectId>20661</ObjectId>
-      <StateNumber>4395</StateNumber>
+    <index id="67" parent="37" name="users_pkey">
+      <ObjectId>30351</ObjectId>
+      <StateNumber>9566</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1245,9 +1255,9 @@ role</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="67" parent="37" name="users_unique_email_idx">
-      <ObjectId>20668</ObjectId>
-      <StateNumber>4396</StateNumber>
+    <index id="68" parent="37" name="users_unique_email_idx">
+      <ObjectId>30358</ObjectId>
+      <StateNumber>9567</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1255,18 +1265,18 @@ role</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="68" parent="37" name="users_pkey">
-      <ObjectId>20662</ObjectId>
-      <StateNumber>4395</StateNumber>
+    <key id="69" parent="37" name="users_pkey">
+      <ObjectId>30352</ObjectId>
+      <StateNumber>9566</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="69" parent="37" name="users_restaurant_id_fkey">
-      <ObjectId>20663</ObjectId>
-      <StateNumber>4395</StateNumber>
+    <foreign-key id="70" parent="37" name="users_restaurant_id_fkey">
+      <ObjectId>30353</ObjectId>
+      <StateNumber>9566</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>20631</RefTableId>
+      <RefTableId>30321</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>

@@ -13,23 +13,27 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public class JpaUserRepository implements UserRepository {
 
     @PersistenceContext
     private EntityManager em;
 
-    @Override
-  //  @Transactional
-    public User update(User user) {
-        return em.merge(user);
-    }
+//    @Override
+//    @Transactional
+//    public User update(User user) {
+//        return em.merge(user);
+//    }
 
     @Override
- //   @Transactional
+    @Transactional
     public User create(User user) {
-        em.persist(user);
-        return user;
+        if (user.isNew()) {
+            em.persist(user);
+            return user;
+        } else {
+            return em.merge(user);
+        }
     }
 
     @Override

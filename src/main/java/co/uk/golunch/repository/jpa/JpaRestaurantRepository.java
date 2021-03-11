@@ -4,26 +4,34 @@ import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.User;
 import co.uk.golunch.repository.RestaurantRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JpaRestaurantRepository implements RestaurantRepository {
 
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     @Override
     public Restaurant create(Restaurant restaurant) {
-        return null;
+        if (restaurant.isNew()) {
+            em.persist(restaurant);
+            return restaurant;
+        } else {
+            return em.merge(restaurant);
+        }
     }
 
-    @Override
-    public Restaurant update(Restaurant restaurant) {
-        return null;
-    }
+//    @Override
+//    public Restaurant update(Restaurant restaurant) {
+//        return null;
+//    }
 
     @Override
     public Restaurant get(int id) {
@@ -31,8 +39,11 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
-        return false;
+        return em.createNamedQuery(Restaurant.DELETE)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
     }
 
     @Override

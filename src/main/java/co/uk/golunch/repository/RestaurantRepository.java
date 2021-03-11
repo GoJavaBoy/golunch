@@ -8,7 +8,7 @@ public interface RestaurantRepository {
 
     Restaurant create(Restaurant restaurant);
 
-    Restaurant update(Restaurant restaurant);
+//    Restaurant update(Restaurant restaurant);
 
     Restaurant get(int id);
 

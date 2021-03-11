@@ -8,7 +8,8 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Restaurant.GET_ALL, query = "SELECT r FROM Restaurant r"),
-        @NamedQuery(name = Restaurant.GET_byID, query = "SELECT r FROM Restaurant r WHERE r.id=:id")
+        @NamedQuery(name = Restaurant.GET_byID, query = "SELECT r FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id")
 })
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
@@ -16,6 +17,7 @@ public class Restaurant extends AbstractBaseEntity {
 
     public static final String GET_ALL = "Restaurant.all";
     public static final String GET_byID = "Restaurant.byId";
+    public static final String DELETE = "Restaurant.delete";
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
@@ -23,11 +25,22 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "price_map_value")
     private Map<String, BigDecimal> menu;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "restaurant_votes", joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "voted_user_id"),
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "voted_user_id"}, name = "user_votes_idx")})
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+//    @JoinTable(name = "restaurant_votes", joinColumns = @JoinColumn(name = "restaurant_id"),
+//            inverseJoinColumns = @JoinColumn(name = "voted_user_id"),
+//            uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "voted_user_id"}, name = "user_votes_idx")})
     private Set<User> votes;
+
+    public Restaurant(Integer id, String name) {
+        super(id, name);
+    }
+
+    public Restaurant(String name) {
+        super(null, name);
+    }
+
+    public Restaurant() {
+    }
 
     public Set<User> getVotes() {
         return votes;
