@@ -5,6 +5,4 @@
 
     <context:component-scan base-package="co.uk.golunch.**.service"/>
 
-    <context:component-scan base-package="co.uk.golunch.**.web"/>
-
 </beans>

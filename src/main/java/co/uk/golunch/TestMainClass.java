@@ -1,19 +1,9 @@
 package co.uk.golunch;
 
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.model.Role;
-import co.uk.golunch.model.User;
-import co.uk.golunch.repository.RestaurantRepository;
-import co.uk.golunch.repository.jpa.JpaRestaurantRepository;
-import co.uk.golunch.repository.jpa.JpaUserRepository;
 import co.uk.golunch.service.RestaurantService;
-import co.uk.golunch.web.RestaurantServlet;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 public class TestMainClass {
 

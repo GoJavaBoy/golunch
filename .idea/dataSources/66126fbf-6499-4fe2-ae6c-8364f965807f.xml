@@ -85,8 +85,8 @@ false Africa/Timbuktu
 false Africa/Tripoli
 false Africa/Tunis
 false Africa/Windhoek
-false America/Adak
-false America/Anchorage
+true America/Adak
+true America/Anchorage
 false America/Anguilla
 false America/Antigua
 false America/Araguaina
@@ -106,7 +106,7 @@ false America/Argentina/Ushuaia
 false America/Aruba
 true America/Asuncion
 false America/Atikokan
-false America/Atka
+true America/Atka
 false America/Bahia
 false America/Bahia_Banderas
 false America/Barbados
@@ -115,16 +115,16 @@ false America/Belize
 false America/Blanc-Sablon
 false America/Boa_Vista
 false America/Bogota
-false America/Boise
+true America/Boise
 false America/Buenos_Aires
-false America/Cambridge_Bay
+true America/Cambridge_Bay
 false America/Campo_Grande
 false America/Cancun
 false America/Caracas
 false America/Catamarca
 false America/Cayenne
 false America/Cayman
-false America/Chicago
+true America/Chicago
 false America/Chihuahua
 false America/Coral_Harbour
 false America/Cordoba
@@ -135,123 +135,123 @@ false America/Curacao
 false America/Danmarkshavn
 false America/Dawson
 false America/Dawson_Creek
-false America/Denver
-false America/Detroit
+true America/Denver
+true America/Detroit
 false America/Dominica
-false America/Edmonton
+true America/Edmonton
 false America/Eirunepe
 false America/El_Salvador
-false America/Ensenada
+true America/Ensenada
 false America/Fort_Nelson
-false America/Fort_Wayne
+true America/Fort_Wayne
 false America/Fortaleza
-false America/Glace_Bay
+true America/Glace_Bay
 false America/Godthab
-false America/Goose_Bay
-false America/Grand_Turk
+true America/Goose_Bay
+true America/Grand_Turk
 false America/Grenada
 false America/Guadeloupe
 false America/Guatemala
 false America/Guayaquil
 false America/Guyana
-false America/Halifax
-false America/Havana
+true America/Halifax
+true America/Havana
 false America/Hermosillo
-false America/Indiana/Indianapolis
-false America/Indiana/Knox
-false America/Indiana/Marengo
-false America/Indiana/Petersburg
-false America/Indiana/Tell_City
-false America/Indiana/Vevay
-false America/Indiana/Vincennes
-false America/Indiana/Winamac
-false America/Indianapolis
-false America/Inuvik
-false America/Iqaluit
+true America/Indiana/Indianapolis
+true America/Indiana/Knox
+true America/Indiana/Marengo
+true America/Indiana/Petersburg
+true America/Indiana/Tell_City
+true America/Indiana/Vevay
+true America/Indiana/Vincennes
+true America/Indiana/Winamac
+true America/Indianapolis
+true America/Inuvik
+true America/Iqaluit
 false America/Jamaica
 false America/Jujuy
-false America/Juneau
-false America/Kentucky/Louisville
-false America/Kentucky/Monticello
-false America/Knox_IN
+true America/Juneau
+true America/Kentucky/Louisville
+true America/Kentucky/Monticello
+true America/Knox_IN
 false America/Kralendijk
 false America/La_Paz
 false America/Lima
-false America/Los_Angeles
-false America/Louisville
+true America/Los_Angeles
+true America/Louisville
 false America/Lower_Princes
 false America/Maceio
 false America/Managua
 false America/Manaus
 false America/Marigot
 false America/Martinique
-false America/Matamoros
+true America/Matamoros
 false America/Mazatlan
 false America/Mendoza
-false America/Menominee
+true America/Menominee
 false America/Merida
-false America/Metlakatla
+true America/Metlakatla
 false America/Mexico_City
-false America/Miquelon
-false America/Moncton
+true America/Miquelon
+true America/Moncton
 false America/Monterrey
 false America/Montevideo
-false America/Montreal
+true America/Montreal
 false America/Montserrat
-false America/Nassau
-false America/New_York
-false America/Nipigon
-false America/Nome
+true America/Nassau
+true America/New_York
+true America/Nipigon
+true America/Nome
 false America/Noronha
-false America/North_Dakota/Beulah
-false America/North_Dakota/Center
-false America/North_Dakota/New_Salem
+true America/North_Dakota/Beulah
+true America/North_Dakota/Center
+true America/North_Dakota/New_Salem
 false America/Nuuk
-false America/Ojinaga
+true America/Ojinaga
 false America/Panama
-false America/Pangnirtung
+true America/Pangnirtung
 false America/Paramaribo
 false America/Phoenix
-false America/Port-au-Prince
+true America/Port-au-Prince
 false America/Port_of_Spain
 false America/Porto_Acre
 false America/Porto_Velho
 false America/Puerto_Rico
 false America/Punta_Arenas
-false America/Rainy_River
-false America/Rankin_Inlet
+true America/Rainy_River
+true America/Rankin_Inlet
 false America/Recife
 false America/Regina
-false America/Resolute
+true America/Resolute
 false America/Rio_Branco
 false America/Rosario
-false America/Santa_Isabel
+true America/Santa_Isabel
 false America/Santarem
 true America/Santiago
 false America/Santo_Domingo
 false America/Sao_Paulo
 false America/Scoresbysund
-false America/Shiprock
-false America/Sitka
+true America/Shiprock
+true America/Sitka
 false America/St_Barthelemy
-false America/St_Johns
+true America/St_Johns
 false America/St_Kitts
 false America/St_Lucia
 false America/St_Thomas
 false America/St_Vincent
 false America/Swift_Current
 false America/Tegucigalpa
-false America/Thule
-false America/Thunder_Bay
-false America/Tijuana
-false America/Toronto
+true America/Thule
+true America/Thunder_Bay
+true America/Tijuana
+true America/Toronto
 false America/Tortola
-false America/Vancouver
+true America/Vancouver
 false America/Virgin
 false America/Whitehorse
-false America/Winnipeg
-false America/Yakutat
-false America/Yellowknife
+true America/Winnipeg
+true America/Yakutat
+true America/Yellowknife
 false Antarctica/Casey
 false Antarctica/Davis
 false Antarctica/DumontDUrville
@@ -347,7 +347,7 @@ false Asia/Srednekolymsk
 false Asia/Taipei
 false Asia/Tashkent
 false Asia/Tbilisi
-false Asia/Tehran
+true Asia/Tehran
 false Asia/Tel_Aviv
 false Asia/Thimbu
 false Asia/Thimphu
@@ -365,7 +365,7 @@ false Asia/Yangon
 false Asia/Yekaterinburg
 false Asia/Yerevan
 false Atlantic/Azores
-false Atlantic/Bermuda
+true Atlantic/Bermuda
 false Atlantic/Canary
 false Atlantic/Cape_Verde
 false Atlantic/Faeroe
@@ -428,19 +428,19 @@ true CLST
 true CLT
 false COT
 false CST
-false CST6CDT
+true CST6CDT
 false CXT
-false Canada/Atlantic
-false Canada/Central
-false Canada/Eastern
-false Canada/Mountain
-false Canada/Newfoundland
-false Canada/Pacific
+true Canada/Atlantic
+true Canada/Central
+true Canada/Eastern
+true Canada/Mountain
+true Canada/Newfoundland
+true Canada/Pacific
 false Canada/Saskatchewan
 false Canada/Yukon
 true Chile/Continental
 true Chile/EasterIsland
-false Cuba
+true Cuba
 false DAVT
 false DDUT
 true EASST
@@ -453,7 +453,7 @@ true EETDST
 true EGST
 false EGT
 false EST
-false EST5EDT
+true EST5EDT
 false Egypt
 true Eire
 false Etc/GMT
@@ -598,7 +598,7 @@ false Indian/Maldives
 false Indian/Mauritius
 false Indian/Mayotte
 false Indian/Reunion
-false Iran
+true Iran
 false Israel
 false JAYT
 false JST
@@ -634,12 +634,12 @@ false MPT
 true MSD
 false MSK
 false MST
-false MST7MDT
+true MST7MDT
 true MUST
 false MUT
 false MVT
 false MYT
-false Mexico/BajaNorte
+true Mexico/BajaNorte
 false Mexico/BajaSur
 false Mexico/General
 true NDT
@@ -654,7 +654,7 @@ true NZ-CHAT
 true NZDT
 false NZST
 false NZT
-false Navajo
+true Navajo
 false OMSST
 false OMST
 true PDT
@@ -671,7 +671,7 @@ false PMST
 false PONT
 false PRC
 false PST
-false PST8PDT
+true PST8PDT
 false PWT
 true PYST
 true PYT
@@ -740,17 +740,17 @@ false Turkey
 false UCT
 true ULAST
 false ULAT
-false US/Alaska
-false US/Aleutian
+true US/Alaska
+true US/Aleutian
 false US/Arizona
-false US/Central
-false US/East-Indiana
-false US/Eastern
+true US/Central
+true US/East-Indiana
+true US/Eastern
 false US/Hawaii
-false US/Indiana-Starke
-false US/Michigan
-false US/Mountain
-false US/Pacific
+true US/Indiana-Starke
+true US/Michigan
+true US/Mountain
+true US/Pacific
 false US/Samoa
 false UT
 false UTC
@@ -784,12 +784,12 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <StartupTime>1613756528</StartupTime>
+      <StartupTime>1615545809</StartupTime>
     </root>
     <database id="2" parent="1" name="golunch">
       <ObjectId>20604</ObjectId>
       <Owner>user</Owner>
-      <IntrospectionStateNumber>9591</IntrospectionStateNumber>
+      <IntrospectionStateNumber>16344</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -877,7 +877,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>9592</IntrospectionStateNumber>
+      <IntrospectionStateNumber>16345</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="2" name="plpgsql">
@@ -978,152 +978,128 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="32" parent="19" name="global_seq">
-      <ObjectId>30319</ObjectId>
+      <ObjectId>44223</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>9586</StateNumber>
+      <StateNumber>16336</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <table id="33" parent="19" name="restaurant_menu">
-      <ObjectId>30332</ObjectId>
+      <ObjectId>44245</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>9565</StateNumber>
+      <StateNumber>16339</StateNumber>
     </table>
-    <table id="34" parent="19" name="restaurant_votes">
-      <ObjectId>30359</ObjectId>
+    <table id="34" parent="19" name="restaurant_menu_history">
+      <ObjectId>44256</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>9568</StateNumber>
+      <StateNumber>16340</StateNumber>
     </table>
     <table id="35" parent="19" name="restaurants">
-      <ObjectId>30321</ObjectId>
+      <ObjectId>44225</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>9565</StateNumber>
+      <StateNumber>16339</StateNumber>
     </table>
-    <table id="36" parent="19" name="user_roles">
-      <ObjectId>30375</ObjectId>
-      <Owner>user</Owner>
-      <StateNumber>9570</StateNumber>
-    </table>
-    <table id="37" parent="19" name="users">
-      <ObjectId>30343</ObjectId>
+    <table id="36" parent="19" name="restaurants_history">
+      <ObjectId>44236</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16340</StateNumber>
     </table>
-    <column id="38" parent="33" name="restaurant_id">
+    <table id="37" parent="19" name="user_roles">
+      <ObjectId>44283</ObjectId>
+      <Owner>user</Owner>
+      <StateNumber>16343</StateNumber>
+    </table>
+    <table id="38" parent="19" name="users">
+      <ObjectId>44267</ObjectId>
+      <Outdated>1</Outdated>
+      <Owner>user</Owner>
+      <StateNumber>16341</StateNumber>
+    </table>
+    <column id="39" parent="33" name="restaurant_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9565</StateNumber>
+      <StateNumber>16339</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="39" parent="33" name="item_map_key">
+    <column id="40" parent="33" name="item_map_key">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9565</StateNumber>
+      <StateNumber>16339</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="40" parent="33" name="price_map_value">
+    <column id="41" parent="33" name="price_map_value">
       <Position>3</Position>
       <DataType>numeric|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9565</StateNumber>
+      <StateNumber>16339</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <foreign-key id="41" parent="33" name="restaurant_menu_restaurant_id_fkey">
-      <ObjectId>30338</ObjectId>
-      <StateNumber>9565</StateNumber>
+    <foreign-key id="42" parent="33" name="restaurant_menu_restaurant_id_fkey">
+      <ObjectId>44251</ObjectId>
+      <StateNumber>16339</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>30321</RefTableId>
+      <RefTableId>44225</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="42" parent="34" name="restaurant_id">
+    <column id="43" parent="34" name="restaurant_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9568</StateNumber>
+      <StateNumber>16340</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="43" parent="34" name="voted_user_id">
-      <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>9568</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="44" parent="34" name="restaurant_user_unique_idx">
-      <ObjectId>30374</ObjectId>
-      <StateNumber>9569</StateNumber>
-      <ColNames>restaurant_id
-voted_user_id</ColNames>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationIds>0,0</CollationIds>
-      <ClassIds>1978,1978</ClassIds>
-    </index>
-    <index id="45" parent="34" name="user_votes_idx">
-      <ObjectId>30362</ObjectId>
-      <StateNumber>9568</StateNumber>
-      <ColNames>restaurant_id
-voted_user_id</ColNames>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationIds>0,0</CollationIds>
-      <ClassIds>1978,1978</ClassIds>
-    </index>
-    <key id="46" parent="34" name="user_votes_idx">
-      <ObjectId>30363</ObjectId>
-      <StateNumber>9568</StateNumber>
-      <ColNames>restaurant_id
-voted_user_id</ColNames>
-      <UnderlyingIndexName>user_votes_idx</UnderlyingIndexName>
-    </key>
-    <foreign-key id="47" parent="34" name="restaurant_votes_restaurant_id_fkey">
-      <ObjectId>30364</ObjectId>
-      <StateNumber>9568</StateNumber>
-      <ColNames>restaurant_id</ColNames>
-      <RefTableId>30321</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>restaurants</RefTableName>
-      <RefKeyName>restaurants_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <foreign-key id="48" parent="34" name="restaurant_votes_voted_user_id_fkey">
-      <ObjectId>30369</ObjectId>
-      <StateNumber>9568</StateNumber>
-      <ColNames>voted_user_id</ColNames>
-      <RefTableId>30343</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>users</RefTableName>
-      <RefKeyName>users_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="49" parent="35" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9564</StateNumber>
-      <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="50" parent="35" name="name">
+    <column id="44" parent="34" name="item_map_key">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9564</StateNumber>
+      <StateNumber>16340</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="51" parent="35" name="restaurants_pkey">
-      <ObjectId>30328</ObjectId>
-      <StateNumber>9564</StateNumber>
+    <column id="45" parent="34" name="price_map_value">
+      <Position>3</Position>
+      <DataType>numeric|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>16340</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <foreign-key id="46" parent="34" name="restaurant_menu_history_restaurant_id_fkey">
+      <ObjectId>44262</ObjectId>
+      <StateNumber>16340</StateNumber>
+      <ColNames>restaurant_id</ColNames>
+      <RefTableId>44236</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>restaurants_history</RefTableName>
+      <RefKeyName>restaurants_history_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="47" parent="35" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>16337</StateNumber>
+      <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="48" parent="35" name="name">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>16337</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="49" parent="35" name="restaurants_pkey">
+      <ObjectId>44232</ObjectId>
+      <StateNumber>16337</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1131,9 +1107,9 @@ voted_user_id</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="52" parent="35" name="restaurant_name_idx">
-      <ObjectId>30330</ObjectId>
-      <StateNumber>9564</StateNumber>
+    <index id="50" parent="35" name="restaurant_name_idx">
+      <ObjectId>44234</ObjectId>
+      <StateNumber>16337</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1141,35 +1117,79 @@ voted_user_id</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="53" parent="35" name="restaurants_pkey">
-      <ObjectId>30329</ObjectId>
-      <StateNumber>9564</StateNumber>
+    <key id="51" parent="35" name="restaurants_pkey">
+      <ObjectId>44233</ObjectId>
+      <StateNumber>16337</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>restaurants_pkey</UnderlyingIndexName>
     </key>
-    <key id="54" parent="35" name="restaurant_name_idx">
-      <ObjectId>30331</ObjectId>
-      <StateNumber>9564</StateNumber>
+    <key id="52" parent="35" name="restaurant_name_idx">
+      <ObjectId>44235</ObjectId>
+      <StateNumber>16337</StateNumber>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>restaurant_name_idx</UnderlyingIndexName>
     </key>
-    <column id="55" parent="36" name="user_id">
+    <column id="53" parent="36" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9570</StateNumber>
+      <StateNumber>16338</StateNumber>
+      <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="56" parent="36" name="role">
+    <column id="54" parent="36" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
-      <StateNumber>9570</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>16338</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="57" parent="36" name="user_roles_idx">
-      <ObjectId>30381</ObjectId>
-      <StateNumber>9570</StateNumber>
+    <column id="55" parent="36" name="saved">
+      <Position>3</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>16338</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="56" parent="36" name="votes">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>16338</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="57" parent="36" name="restaurants_history_pkey">
+      <ObjectId>44243</ObjectId>
+      <StateNumber>16338</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="58" parent="36" name="restaurants_history_pkey">
+      <ObjectId>44244</ObjectId>
+      <StateNumber>16338</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>restaurants_history_pkey</UnderlyingIndexName>
+    </key>
+    <column id="59" parent="37" name="user_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>16343</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="60" parent="37" name="role">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>16343</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="61" parent="37" name="user_roles_idx">
+      <ObjectId>44289</ObjectId>
+      <StateNumber>16343</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <Unique>1</Unique>
@@ -1178,76 +1198,76 @@ role</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>1978,3126</ClassIds>
     </index>
-    <key id="58" parent="36" name="user_roles_idx">
-      <ObjectId>30382</ObjectId>
-      <StateNumber>9570</StateNumber>
+    <key id="62" parent="37" name="user_roles_idx">
+      <ObjectId>44290</ObjectId>
+      <StateNumber>16343</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <UnderlyingIndexName>user_roles_idx</UnderlyingIndexName>
     </key>
-    <foreign-key id="59" parent="36" name="user_roles_user_id_fkey">
-      <ObjectId>30383</ObjectId>
-      <StateNumber>9570</StateNumber>
+    <foreign-key id="63" parent="37" name="user_roles_user_id_fkey">
+      <ObjectId>44291</ObjectId>
+      <StateNumber>16343</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>30343</RefTableId>
+      <RefTableId>44267</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>users</RefTableName>
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="60" parent="37" name="id">
+    <column id="64" parent="38" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="61" parent="37" name="name">
+    <column id="65" parent="38" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="62" parent="37" name="email">
+    <column id="66" parent="38" name="email">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="63" parent="37" name="password">
+    <column id="67" parent="38" name="password">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="64" parent="37" name="registered">
+    <column id="68" parent="38" name="registered">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <column id="65" parent="37" name="voted">
+    <column id="69" parent="38" name="voted">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="66" parent="37" name="restaurant_id">
+    <column id="70" parent="38" name="restaurant_id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>9566</StateNumber>
+      <StateNumber>16341</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="67" parent="37" name="users_pkey">
-      <ObjectId>30351</ObjectId>
-      <StateNumber>9566</StateNumber>
+    <index id="71" parent="38" name="users_pkey">
+      <ObjectId>44275</ObjectId>
+      <StateNumber>16341</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1255,9 +1275,9 @@ role</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="68" parent="37" name="users_unique_email_idx">
-      <ObjectId>30358</ObjectId>
-      <StateNumber>9567</StateNumber>
+    <index id="72" parent="38" name="users_unique_email_idx">
+      <ObjectId>44282</ObjectId>
+      <StateNumber>16342</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1265,18 +1285,18 @@ role</ColNames>
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="69" parent="37" name="users_pkey">
-      <ObjectId>30352</ObjectId>
-      <StateNumber>9566</StateNumber>
+    <key id="73" parent="38" name="users_pkey">
+      <ObjectId>44276</ObjectId>
+      <StateNumber>16341</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="70" parent="37" name="users_restaurant_id_fkey">
-      <ObjectId>30353</ObjectId>
-      <StateNumber>9566</StateNumber>
+    <foreign-key id="74" parent="38" name="users_restaurant_id_fkey">
+      <ObjectId>44277</ObjectId>
+      <StateNumber>16341</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>30321</RefTableId>
+      <RefTableId>44225</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>

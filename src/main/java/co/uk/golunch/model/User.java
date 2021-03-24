@@ -13,11 +13,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 
-@NamedQueries({
-        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
-        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=:email"),
-        @NamedQuery(name = User.ALL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles")
-})
+
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractBaseEntity {
@@ -127,4 +123,5 @@ public class User extends AbstractBaseEntity {
     public boolean isNew() {
         return this.id == null;
     }
+
 }

@@ -50,6 +50,14 @@ public class Restaurant extends AbstractBaseEntity {
         this.votes = votes;
     }
 
+    public void addVote(User user){
+        this.votes.add(user);
+    }
+
+    public void removeVote(User user){
+        this.votes.remove(user);
+    }
+
     public Map<String, BigDecimal> getMenu() {
         return menu;
     }
