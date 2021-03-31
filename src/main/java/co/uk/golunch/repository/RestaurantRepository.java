@@ -8,10 +8,10 @@ public interface RestaurantRepository {
 
     Restaurant create(Restaurant restaurant);
 
-//    Restaurant update(Restaurant restaurant);
-
+    // null if not found
     Restaurant get(int id);
 
+    // false if not found
     boolean delete(int id);
 
     List<Restaurant> getAll();

@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static co.uk.golunch.util.ValidationUtil.assureIdConsistent;
+import static co.uk.golunch.util.ValidationUtil.checkNew;
+
 @Controller
 @RequestMapping("/restaurants")
 public class RestaurantRestController {
@@ -41,9 +44,11 @@ public class RestaurantRestController {
 
         if (StringUtils.hasLength(request.getParameter("id"))) {
             log.info("update restaurant {} with id {}", restaurant, getId(request));
+            assureIdConsistent(restaurant, getId(request));
             restaurantService.update(restaurant, getId(request));
         } else {
             log.info("create restaurant {}", restaurant);
+            checkNew(restaurant);
             restaurantService.create(restaurant);
         }
         return "redirect:restaurants";
@@ -51,6 +56,7 @@ public class RestaurantRestController {
 
     @GetMapping
     public String getAll(Model model) {
+        log.info("getAll Restaurants");
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }

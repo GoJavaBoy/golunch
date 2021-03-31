@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface UserRepository {
 
-//    // null if not found
-//    User update(User user);
-
     User create(User user);
 
     // false if not found

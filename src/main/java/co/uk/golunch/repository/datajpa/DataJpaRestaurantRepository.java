@@ -16,7 +16,6 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
         this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
-
     @Override
     @Transactional
     public Restaurant create(Restaurant restaurant) {

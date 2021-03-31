@@ -1,6 +1,7 @@
 package co.uk.golunch.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
@@ -11,6 +12,8 @@ public class HistoryRestaurant extends AbstractBaseEntity{
 
     private int votes;
 
+    @Column(name = "saved", nullable = false, columnDefinition = "timestamp default now()")
+    @NotNull
     private Date saved;
 
     @ElementCollection(fetch = FetchType.LAZY)
