@@ -1,7 +1,7 @@
 package co.uk.golunch.util;
 
 
-import co.uk.golunch.model.AbstractBaseEntity;
+import co.uk.golunch.model.AbstractNamedEntity;
 import co.uk.golunch.util.exception.NotFoundException;
 
 public class ValidationUtil {
@@ -28,13 +28,13 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkNew(AbstractBaseEntity entity) {
+    public static void checkNew(AbstractNamedEntity entity) {
         if (!entity.isNew()) {
             throw new IllegalArgumentException(entity + " must be new (id=null)");
         }
     }
 
-    public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
+    public static void assureIdConsistent(AbstractNamedEntity entity, int id) {
 //      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
         if (entity.isNew()) {
             entity.setId(id);

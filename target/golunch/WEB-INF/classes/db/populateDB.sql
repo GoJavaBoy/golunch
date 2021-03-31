@@ -29,7 +29,7 @@ VALUES ('USER', 100005),
        ('USER', 100010),
        ('USER', 100011);
 
-INSERT INTO restaurant_menu (restaurant_id, item_map_key, price_map_value)
+INSERT INTO restaurant_menu (restaurant_id, name, price)
 VALUES (100000, 'Chicken Burger', 12.99),
        (100000, 'Bacon Burger', 10.99),
        (100000, 'Chicken Nugets', 3.50),

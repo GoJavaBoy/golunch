@@ -1,9 +1,12 @@
 package co.uk.golunch;
 
+import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.service.RestaurantService;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Set;
 
 public class TestMainClass {
 
@@ -59,8 +62,13 @@ public class TestMainClass {
 //            Map<String, BigDecimal> menu = restaurant.getMenu();
 //            menu.forEach((k, v) -> System.out.println(k+" "+v));
 
-            restaurantService.create(new Restaurant(null, "Zima"));
-            System.out.println(restaurantService.get(100012).getVotes());
+//            restaurantService.create(new Restaurant(null, "Zima"));
+//            System.out.println(restaurantService.get(100012).getVotes());
+            Restaurant restaurant = restaurantService.get(100000);
+            System.out.println(restaurant);
+            restaurantService.delete(100000);
+            restaurant = restaurantService.get(100000);
+            System.out.println(restaurant);
         }
     }
 }

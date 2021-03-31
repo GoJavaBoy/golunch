@@ -1,15 +1,14 @@
 package co.uk.golunch.model;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @MappedSuperclass
-abstract public class AbstractBaseEntity {
-
+@Access(AccessType.FIELD)
+public abstract class AbstractBaseEntity implements Persistable<Integer> {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -17,33 +16,20 @@ abstract public class AbstractBaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
 
-    @Column(name = "name", nullable = false)
-    @NotBlank
-    @Size(min = 2, max = 100)
-    protected String name;
-
-    public AbstractBaseEntity() {
+    protected AbstractBaseEntity() {
     }
 
-    public AbstractBaseEntity(Integer id, String name) {
+    protected AbstractBaseEntity(Integer id) {
         this.id = id;
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public Integer getId() {
+        return id;
     }
 
     public int id() {
@@ -51,6 +37,7 @@ abstract public class AbstractBaseEntity {
         return id;
     }
 
+    @Override
     public boolean isNew() {
         return this.id == null;
     }
@@ -63,17 +50,12 @@ abstract public class AbstractBaseEntity {
         if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
-        AbstractBaseEntity that = (AbstractBaseEntity) o;
+        AbstractNamedEntity that = (AbstractNamedEntity) o;
         return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
         return id == null ? 0 : id;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + " id: " + id + " name: " + name;
     }
 }

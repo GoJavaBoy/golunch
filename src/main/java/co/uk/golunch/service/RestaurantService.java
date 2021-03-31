@@ -39,7 +39,7 @@ public class RestaurantService {
     public boolean delete(int id) {
         Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
         HistoryRestaurant historyRestaurant = new HistoryRestaurant(id, oldRestaurant.getName(),
-                oldRestaurant.getVotes().size(), oldRestaurant.getMenu(), new Date());
+                oldRestaurant.getVotes(), oldRestaurant.getMenu(), new Date());
         historyRepository.saveInHistory(historyRestaurant);
         return restaurantRepository.delete(id);
     }
@@ -54,7 +54,7 @@ public class RestaurantService {
         Assert.notNull(restaurant, "meal must not be null");
         Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.create(restaurant), restaurant.id());
         HistoryRestaurant historyRestaurant = new HistoryRestaurant(resId, oldRestaurant.getName(),
-                oldRestaurant.getVotes().size(), oldRestaurant.getMenu(), new Date());
+                oldRestaurant.getVotes(), oldRestaurant.getMenu(), new Date());
         historyRepository.saveInHistory(historyRestaurant);
     }
 

@@ -27,7 +27,7 @@
                 <jsp:useBean id="restaurant" type="co.uk.golunch.model.Restaurant"/>
                 <td>${restaurant.name}</td>
                 <td>${restaurant.menu}</td>
-                <td>Votes: ${restaurant.votes.size()}</td>
+                <td>Votes: ${restaurant.getVotes()}</td>
                     <%--                <td><a href="restaurants?action=vote&id=${restaurant.id}&userId=">Vote</a></td>--%>
                 <td><a href="restaurants/vote?id=${restaurant.id}">Vote</a></td>
                 <td><a href="restaurants/update?id=${restaurant.id}">Update</a></td>

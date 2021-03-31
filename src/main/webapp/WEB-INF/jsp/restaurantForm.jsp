@@ -29,10 +29,10 @@
                 </tr>
                 </thead>
                 <c:set var="count" value="0" scope="page" />
-                <c:forEach items="${restaurant.menu}" var="restaurant">
+                <c:forEach items="${restaurant.menu}" var="dish">
                     <tr>
-                        <td><input type="text" value="${restaurant.key}" name="dish_${count}"></td>
-                        <td><input type="number" value="${restaurant.value}" name="price_${count}"></td>
+                        <td><input type="text" value="${dish.name}" name="dish_${count}"></td>
+                        <td><input type="number" value="${dish.price}" name="price_${count}"></td>
                     </tr>
                     <c:set var="count" value="${count + 1}" scope="page"/>
                 </c:forEach>

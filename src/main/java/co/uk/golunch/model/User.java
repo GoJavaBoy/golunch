@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractBaseEntity {
+public class User extends AbstractNamedEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -117,13 +117,15 @@ public class User extends AbstractBaseEntity {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
-    public int id() {
-        Assert.notNull(id, "Entity must have id");
-        return id;
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", registered=" + registered +
+                ", voted=" + voted +
+                ", restaurant=" + restaurant +
+                ", roles=" + roles +
+                '}';
     }
-
-    public boolean isNew() {
-        return this.id == null;
-    }
-
 }
