@@ -789,7 +789,7 @@ false Zulu
     <database id="2" parent="1" name="golunch">
       <ObjectId>20604</ObjectId>
       <Owner>user</Owner>
-      <IntrospectionStateNumber>19064</IntrospectionStateNumber>
+      <IntrospectionStateNumber>19355</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -877,7 +877,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>19065</IntrospectionStateNumber>
+      <IntrospectionStateNumber>19356</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="2" name="plpgsql">
@@ -978,69 +978,67 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="32" parent="19" name="global_seq">
-      <ObjectId>67027</ObjectId>
+      <ObjectId>67868</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>19058</StateNumber>
+      <StateNumber>19349</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <table id="33" parent="19" name="restaurant_menu">
-      <ObjectId>67049</ObjectId>
+      <ObjectId>67890</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>19046</StateNumber>
+      <StateNumber>19329</StateNumber>
     </table>
     <table id="34" parent="19" name="restaurant_menu_history">
-      <ObjectId>67062</ObjectId>
+      <ObjectId>67903</ObjectId>
       <Outdated>1</Outdated>
       <Owner>user</Owner>
-      <StateNumber>19047</StateNumber>
+      <StateNumber>19330</StateNumber>
     </table>
     <table id="35" parent="19" name="restaurants">
-      <ObjectId>67029</ObjectId>
-      <Outdated>1</Outdated>
+      <ObjectId>67870</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>19046</StateNumber>
+      <StateNumber>19329</StateNumber>
     </table>
     <table id="36" parent="19" name="restaurants_history">
-      <ObjectId>67040</ObjectId>
-      <Outdated>1</Outdated>
+      <ObjectId>67881</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>19047</StateNumber>
+      <StateNumber>19330</StateNumber>
     </table>
     <table id="37" parent="19" name="user_roles">
-      <ObjectId>67089</ObjectId>
+      <ObjectId>67930</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>19050</StateNumber>
+      <StateNumber>19333</StateNumber>
     </table>
     <table id="38" parent="19" name="users">
-      <ObjectId>67073</ObjectId>
+      <ObjectId>67914</ObjectId>
       <Owner>user</Owner>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
     </table>
     <column id="39" parent="33" name="restaurant_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19046</StateNumber>
+      <StateNumber>19329</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="40" parent="33" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19046</StateNumber>
+      <StateNumber>19329</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="41" parent="33" name="price">
       <Position>3</Position>
       <DataType>numeric|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19046</StateNumber>
+      <StateNumber>19329</StateNumber>
       <TypeId>1700</TypeId>
     </column>
     <index id="42" parent="33" name="name_price_idx">
-      <ObjectId>67055</ObjectId>
-      <StateNumber>19046</StateNumber>
+      <ObjectId>67896</ObjectId>
+      <StateNumber>19329</StateNumber>
       <ColNames>name
 price</ColNames>
       <Unique>1</Unique>
@@ -1050,17 +1048,17 @@ price</ColNames>
       <ClassIds>3126,3125</ClassIds>
     </index>
     <key id="43" parent="33" name="name_price_idx">
-      <ObjectId>67056</ObjectId>
-      <StateNumber>19046</StateNumber>
+      <ObjectId>67897</ObjectId>
+      <StateNumber>19329</StateNumber>
       <ColNames>name
 price</ColNames>
       <UnderlyingIndexName>name_price_idx</UnderlyingIndexName>
     </key>
     <foreign-key id="44" parent="33" name="restaurant_menu_restaurant_id_fkey">
-      <ObjectId>67057</ObjectId>
-      <StateNumber>19046</StateNumber>
+      <ObjectId>67898</ObjectId>
+      <StateNumber>19329</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>67029</RefTableId>
+      <RefTableId>67870</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>
@@ -1071,28 +1069,28 @@ price</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19047</StateNumber>
+      <StateNumber>19330</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="46" parent="34" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19047</StateNumber>
+      <StateNumber>19330</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="47" parent="34" name="price">
       <Position>3</Position>
       <DataType>numeric|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19047</StateNumber>
+      <StateNumber>19330</StateNumber>
       <TypeId>1700</TypeId>
     </column>
     <foreign-key id="48" parent="34" name="restaurant_menu_history_restaurant_id_fkey">
-      <ObjectId>67068</ObjectId>
-      <StateNumber>19047</StateNumber>
+      <ObjectId>67909</ObjectId>
+      <StateNumber>19330</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>67040</RefTableId>
+      <RefTableId>67881</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants_history</RefTableName>
       <RefKeyName>restaurants_history_pkey</RefKeyName>
@@ -1103,7 +1101,7 @@ price</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19044</StateNumber>
+      <StateNumber>19327</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1111,12 +1109,12 @@ price</ColNames>
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19044</StateNumber>
+      <StateNumber>19327</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="51" parent="35" name="restaurants_pkey">
-      <ObjectId>67036</ObjectId>
-      <StateNumber>19044</StateNumber>
+      <ObjectId>67877</ObjectId>
+      <StateNumber>19327</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1125,8 +1123,8 @@ price</ColNames>
       <ClassIds>1978</ClassIds>
     </index>
     <index id="52" parent="35" name="restaurant_name_idx">
-      <ObjectId>67038</ObjectId>
-      <StateNumber>19044</StateNumber>
+      <ObjectId>67879</ObjectId>
+      <StateNumber>19327</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1135,15 +1133,15 @@ price</ColNames>
       <ClassIds>3126</ClassIds>
     </index>
     <key id="53" parent="35" name="restaurants_pkey">
-      <ObjectId>67037</ObjectId>
-      <StateNumber>19044</StateNumber>
+      <ObjectId>67878</ObjectId>
+      <StateNumber>19327</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>restaurants_pkey</UnderlyingIndexName>
     </key>
     <key id="54" parent="35" name="restaurant_name_idx">
-      <ObjectId>67039</ObjectId>
-      <StateNumber>19044</StateNumber>
+      <ObjectId>67880</ObjectId>
+      <StateNumber>19327</StateNumber>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>restaurant_name_idx</UnderlyingIndexName>
     </key>
@@ -1151,7 +1149,7 @@ price</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19045</StateNumber>
+      <StateNumber>19328</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1159,24 +1157,24 @@ price</ColNames>
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19045</StateNumber>
+      <StateNumber>19328</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="57" parent="36" name="saved">
       <Position>3</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>19045</StateNumber>
+      <StateNumber>19328</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <column id="58" parent="36" name="votes">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>19045</StateNumber>
+      <StateNumber>19328</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="59" parent="36" name="restaurants_history_pkey">
-      <ObjectId>67047</ObjectId>
-      <StateNumber>19045</StateNumber>
+      <ObjectId>67888</ObjectId>
+      <StateNumber>19328</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1185,8 +1183,8 @@ price</ColNames>
       <ClassIds>1978</ClassIds>
     </index>
     <key id="60" parent="36" name="restaurants_history_pkey">
-      <ObjectId>67048</ObjectId>
-      <StateNumber>19045</StateNumber>
+      <ObjectId>67889</ObjectId>
+      <StateNumber>19328</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>restaurants_history_pkey</UnderlyingIndexName>
@@ -1195,18 +1193,18 @@ price</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19050</StateNumber>
+      <StateNumber>19333</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="62" parent="37" name="role">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
-      <StateNumber>19050</StateNumber>
+      <StateNumber>19333</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="63" parent="37" name="user_roles_idx">
-      <ObjectId>67095</ObjectId>
-      <StateNumber>19050</StateNumber>
+      <ObjectId>67936</ObjectId>
+      <StateNumber>19333</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <Unique>1</Unique>
@@ -1216,17 +1214,17 @@ role</ColNames>
       <ClassIds>1978,3126</ClassIds>
     </index>
     <key id="64" parent="37" name="user_roles_idx">
-      <ObjectId>67096</ObjectId>
-      <StateNumber>19050</StateNumber>
+      <ObjectId>67937</ObjectId>
+      <StateNumber>19333</StateNumber>
       <ColNames>user_id
 role</ColNames>
       <UnderlyingIndexName>user_roles_idx</UnderlyingIndexName>
     </key>
     <foreign-key id="65" parent="37" name="user_roles_user_id_fkey">
-      <ObjectId>67097</ObjectId>
-      <StateNumber>19050</StateNumber>
+      <ObjectId>67938</ObjectId>
+      <StateNumber>19333</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>67073</RefTableId>
+      <RefTableId>67914</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>users</RefTableName>
       <RefKeyName>users_pkey</RefKeyName>
@@ -1237,7 +1235,7 @@ role</ColNames>
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <DefaultExpression>nextval(&apos;global_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1245,46 +1243,46 @@ role</ColNames>
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="68" parent="38" name="email">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="69" parent="38" name="password">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="70" parent="38" name="registered">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
     <column id="71" parent="38" name="voted">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <column id="72" parent="38" name="restaurant_id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>19048</StateNumber>
+      <StateNumber>19331</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="73" parent="38" name="users_pkey">
-      <ObjectId>67081</ObjectId>
-      <StateNumber>19048</StateNumber>
+      <ObjectId>67922</ObjectId>
+      <StateNumber>19331</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1293,8 +1291,8 @@ role</ColNames>
       <ClassIds>1978</ClassIds>
     </index>
     <index id="74" parent="38" name="users_unique_email_idx">
-      <ObjectId>67088</ObjectId>
-      <StateNumber>19049</StateNumber>
+      <ObjectId>67929</ObjectId>
+      <StateNumber>19332</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1303,17 +1301,17 @@ role</ColNames>
       <ClassIds>3126</ClassIds>
     </index>
     <key id="75" parent="38" name="users_pkey">
-      <ObjectId>67082</ObjectId>
-      <StateNumber>19048</StateNumber>
+      <ObjectId>67923</ObjectId>
+      <StateNumber>19331</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="76" parent="38" name="users_restaurant_id_fkey">
-      <ObjectId>67083</ObjectId>
-      <StateNumber>19048</StateNumber>
+      <ObjectId>67924</ObjectId>
+      <StateNumber>19331</StateNumber>
       <ColNames>restaurant_id</ColNames>
-      <RefTableId>67029</RefTableId>
+      <RefTableId>67870</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>restaurants</RefTableName>
       <RefKeyName>restaurants_pkey</RefKeyName>

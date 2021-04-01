@@ -22,11 +22,6 @@ public class HistoryRestaurant extends AbstractNamedEntity {
     @NotNull
     private Date saved;
 
-//    @ElementCollection(fetch = FetchType.LAZY)
-//    @CollectionTable(name = "restaurant_menu_history", joinColumns = @JoinColumn(name = "restaurant_id"))
-//    @MapKeyColumn(name = "name")
-//    @Column(name = "price")
-
     @ElementCollection
     @CollectionTable(name="restaurant_menu_history", joinColumns = @JoinColumn(name = "restaurant_id"))
     @AttributeOverrides({

@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static co.uk.golunch.util.ValidationUtil.*;
 
@@ -52,10 +51,11 @@ public class RestaurantService {
     @CacheEvict(value = "restaurants", allEntries = true)
     public void update(Restaurant restaurant, int resId) {
         Assert.notNull(restaurant, "meal must not be null");
-        Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.create(restaurant), restaurant.id());
+        Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(resId), resId);
         HistoryRestaurant historyRestaurant = new HistoryRestaurant(resId, oldRestaurant.getName(),
                 oldRestaurant.getVotes(), oldRestaurant.getMenu(), new Date());
         historyRepository.saveInHistory(historyRestaurant);
+        restaurantRepository.create(restaurant);
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)

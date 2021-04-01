@@ -6,6 +6,8 @@ import co.uk.golunch.service.RestaurantService;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 public class TestMainClass {
@@ -66,7 +68,11 @@ public class TestMainClass {
 //            System.out.println(restaurantService.get(100012).getVotes());
             Restaurant restaurant = restaurantService.get(100000);
             System.out.println(restaurant);
-            restaurantService.delete(100000);
+            Set<Dish> dishes = new HashSet<>();
+            dishes.add(new Dish("Salat", new BigDecimal("1.99")));
+            dishes.add(new Dish("Burger", new BigDecimal("2.99")));
+            restaurant.setMenu(dishes);
+            restaurantService.update(restaurant, 100000);
             restaurant = restaurantService.get(100000);
             System.out.println(restaurant);
         }

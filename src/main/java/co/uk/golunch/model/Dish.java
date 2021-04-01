@@ -2,28 +2,23 @@ package co.uk.golunch.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
 
-//@Entity
 @Embeddable
-//@Table(name = "restaurant_menu")
 public class Dish {
 
-  //  @Column(name = "name", nullable = false)
     @NotBlank
     private String name;
 
-  //  @Column(name = "price", nullable = false)
+    @NotNull
     private BigDecimal price;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "restaurant_id")
-//    private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(@NotBlank String name, BigDecimal price) {
+    public Dish(@NotBlank String name, @NotNull BigDecimal price) {
         this.name = name;
         this.price = price;
     }
@@ -44,20 +39,24 @@ public class Dish {
         this.price = price;
     }
 
-//    public Restaurant getRestaurant() {
-//        return restaurant;
-//    }
-//
-//    public void setRestaurant(Restaurant restaurant) {
-//        this.restaurant = restaurant;
-//    }
-
-
     @Override
     public String toString() {
         return "Dish{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dish dish = (Dish) o;
+        return Objects.equals(name, dish.name) && Objects.equals(price, dish.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
     }
 }

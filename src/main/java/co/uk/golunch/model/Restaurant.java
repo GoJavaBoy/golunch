@@ -10,14 +10,6 @@ import java.util.Set;
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
 
-
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
-//    @MapKeyColumn(name = "item_map_key")
-//    @Column(name = "price_map_value")
-//    private Map<String, BigDecimal> menu;
-
-   // @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
    @ElementCollection(fetch = FetchType.EAGER)
    @CollectionTable(name="restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
    @AttributeOverrides({
@@ -29,9 +21,6 @@ public class Restaurant extends AbstractNamedEntity {
     private Set<Dish> menu;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-//    @JoinTable(name = "restaurant_votes", joinColumns = @JoinColumn(name = "restaurant_id"),
-//            inverseJoinColumns = @JoinColumn(name = "voted_user_id"),
-//            uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "voted_user_id"}, name = "user_votes_idx")})
     private Set<User> votes;
 
     public Restaurant(Integer id, String name) {
