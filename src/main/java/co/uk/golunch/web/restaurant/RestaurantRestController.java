@@ -6,25 +6,25 @@ import co.uk.golunch.service.RestaurantService;
 import co.uk.golunch.web.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.net.URI;
 import java.util.*;
 
 import static co.uk.golunch.util.ValidationUtil.assureIdConsistent;
 import static co.uk.golunch.util.ValidationUtil.checkNew;
 
-@Controller
-@RequestMapping("/restaurants")
+@RestController
+@RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantRestController {
-    private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
+    static final String REST_URL = "/restaurants";
+    private static final Logger log = LoggerFactory.getLogger(JspRestaurantController.class);
 
     private final RestaurantService restaurantService;
 
@@ -32,82 +32,55 @@ public class RestaurantRestController {
         this.restaurantService = restaurantService;
     }
 
-    @PostMapping
-    public String createOrUpdate(HttpServletRequest request) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable int id, @RequestBody Restaurant restaurant) {
+            log.info("update restaurant {} with id {}", restaurant, id);
+            assureIdConsistent(restaurant, id);
+            restaurantService.update(restaurant, id);
+    }
 
-        Restaurant restaurant = new Restaurant(request.getParameter("name"));
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
+        log.info("create restaurant {}", restaurant);
+        checkNew(restaurant);
+        Restaurant created = restaurantService.create(restaurant);
 
-        Set<Dish> menu = getMenu(request);
-        restaurant.setMenu(menu);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
 
-        if (StringUtils.hasLength(request.getParameter("id"))) {
-            log.info("update restaurant {} with id {}", restaurant, getId(request));
-            assureIdConsistent(restaurant, getId(request));
-            restaurantService.update(restaurant, getId(request));
-        } else {
-            log.info("create restaurant {}", restaurant);
-            checkNew(restaurant);
-            restaurantService.create(restaurant);
-        }
-        return "redirect:restaurants";
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }
+
+    @GetMapping("/{id}")
+    public Restaurant get(@PathVariable int id) {
+        return restaurantService.get(id);
     }
 
     @GetMapping
-    public String getAll(Model model) {
+    public List<Restaurant> getAll() {
         log.info("getAll Restaurants");
-        model.addAttribute("restaurants", restaurantService.getAll());
-        return "restaurants";
+        return restaurantService.getAll();
     }
 
-    @GetMapping("/delete")
-    public String deleteRestaurant(HttpServletRequest request) {
-        int id = getId(request);
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteRestaurant(@PathVariable int id) {
         log.info("delete restaurant {}", id);
         restaurantService.delete(id);
-        return "redirect:/restaurants";
     }
 
-    @GetMapping("/create")
-    public String create(Model model) {
-        final Restaurant restaurant = new Restaurant("");
-        model.addAttribute("restaurant", restaurant);
-        return "restaurantForm";
-    }
-
-    @GetMapping("/update")
-    public String update(HttpServletRequest request, Model model) {
-        int id = getId(request);
-        final Restaurant restaurant = restaurantService.get(id);
-        model.addAttribute("restaurant", restaurant);
-        return "restaurantForm";
-    }
-
-    @GetMapping("/vote")
-    public String vote(HttpServletRequest request) {
-        int resId = getId(request);
+    @GetMapping("/vote/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void vote(@PathVariable int resId) {
         int userId = SecurityUtil.authUserId();
         log.info("user {} vote for restaurant {}", userId, resId);
         restaurantService.vote(userId, resId);
-        return "redirect:/restaurants";
     }
 
-    private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.parseInt(paramId);
-    }
+    //add Dish
 
-    private Set<Dish> getMenu(HttpServletRequest request) {
-        Set<Dish> menu = new HashSet<>();
-        Map<String, String[]> dishPriceMap = request.getParameterMap();
-        for (int i = 0; i < dishPriceMap.size(); i++) {
-            String[] dish = dishPriceMap.get("dish_"+i);
-            String[] price = dishPriceMap.get("price_"+i);
-            if (dish != null && price != null && !dish[0].isBlank() && !price[0].isBlank()){
-                menu.add(new Dish(dish[0], BigDecimal.valueOf(Double.parseDouble(price[0]))));
-            }
-        }
-        return menu;
-    }
+    //add Set<Dish>
 
 }
