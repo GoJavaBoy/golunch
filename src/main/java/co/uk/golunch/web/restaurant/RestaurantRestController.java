@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -32,7 +29,7 @@ public class RestaurantRestController {
         this.restaurantService = restaurantService;
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable int id, @RequestBody Restaurant restaurant) {
             log.info("update restaurant {} with id {}", restaurant, id);
@@ -66,21 +63,24 @@ public class RestaurantRestController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteRestaurant(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
         log.info("delete restaurant {}", id);
         restaurantService.delete(id);
     }
 
-    @GetMapping("/vote/{id}")
+    @GetMapping("/{id}/vote")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void vote(@PathVariable int resId) {
+    public void vote(@PathVariable int id) {
         int userId = SecurityUtil.authUserId();
-        log.info("user {} vote for restaurant {}", userId, resId);
-        restaurantService.vote(userId, resId);
+        log.info("user {} vote for restaurant {}", userId, id);
+        restaurantService.vote(userId, id);
     }
 
-    //add Dish
-
-    //add Set<Dish>
+//    @PostMapping("/{id}/menu")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void addDish(@PathVariable int id, @RequestBody Dish... dishes){
+//        log.info("add dish for restaurant {}", id);
+//        restaurantService.addDish(id, dishes);
+//    }
 
 }

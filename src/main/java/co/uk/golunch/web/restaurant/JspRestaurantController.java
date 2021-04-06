@@ -21,8 +21,8 @@ import java.util.*;
 import static co.uk.golunch.util.ValidationUtil.assureIdConsistent;
 import static co.uk.golunch.util.ValidationUtil.checkNew;
 
-@Controller
-@RequestMapping("/restaurants")
+//@Controller
+//@RequestMapping("/restaurants")
 public class JspRestaurantController {
     private static final Logger log = LoggerFactory.getLogger(JspRestaurantController.class);
 

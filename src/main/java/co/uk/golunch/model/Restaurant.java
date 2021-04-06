@@ -1,8 +1,11 @@
 package co.uk.golunch.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Set;
 
 
@@ -20,8 +23,12 @@ public class Restaurant extends AbstractNamedEntity {
    })
     private Set<Dish> menu;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-    private Set<User> votes;
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    private Set<User> votesWithUser;
+
+    //Counting votes without initialize votesWithUser
+    @Formula("(select count(*) from users where users.restaurant_id = id)")
+    private int votes;
 
     public Restaurant(Integer id, String name) {
         super(id, name);
@@ -34,24 +41,12 @@ public class Restaurant extends AbstractNamedEntity {
     public Restaurant() {
     }
 
-    public Set<User> getVotedUsers() {
+    public int getVotes() {
         return votes;
     }
 
-    public int getVotes() {
-        return votes == null ? 0 : votes.size();
-    }
-
-    public void setVotes(Set<User> votes) {
+    public void setVotes(int votes) {
         this.votes = votes;
-    }
-
-    public void addVote(User user){
-        this.votes.add(user);
-    }
-
-    public void removeVote(User user){
-        this.votes.remove(user);
     }
 
     public Set<Dish> getMenu() {

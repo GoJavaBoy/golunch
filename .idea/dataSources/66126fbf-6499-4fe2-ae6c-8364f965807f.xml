@@ -997,11 +997,13 @@ UC/10
     </table>
     <table id="35" parent="19" name="restaurants">
       <ObjectId>67870</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>user</Owner>
       <StateNumber>19329</StateNumber>
     </table>
     <table id="36" parent="19" name="restaurants_history">
       <ObjectId>67881</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>user</Owner>
       <StateNumber>19330</StateNumber>
     </table>
@@ -1012,6 +1014,7 @@ UC/10
     </table>
     <table id="38" parent="19" name="users">
       <ObjectId>67914</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>user</Owner>
       <StateNumber>19331</StateNumber>
     </table>

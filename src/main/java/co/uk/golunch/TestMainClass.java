@@ -68,13 +68,7 @@ public class TestMainClass {
 //            System.out.println(restaurantService.get(100012).getVotes());
             Restaurant restaurant = restaurantService.get(100000);
             System.out.println(restaurant);
-            Set<Dish> dishes = new HashSet<>();
-            dishes.add(new Dish("Salat", new BigDecimal("1.99")));
-            dishes.add(new Dish("Burger", new BigDecimal("2.99")));
-            restaurant.setMenu(dishes);
-            restaurantService.update(restaurant, 100000);
-            restaurant = restaurantService.get(100000);
-            System.out.println(restaurant);
+            System.out.println(restaurant.getVotes());
         }
     }
 }

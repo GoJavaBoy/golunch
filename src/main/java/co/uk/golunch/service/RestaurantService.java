@@ -1,5 +1,6 @@
 package co.uk.golunch.service;
 
+import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.HistoryRestaurant;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.User;
@@ -12,8 +13,10 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static co.uk.golunch.util.ValidationUtil.*;
 
@@ -50,11 +53,9 @@ public class RestaurantService {
 
     @CacheEvict(value = "restaurants", allEntries = true)
     public void update(Restaurant restaurant, int resId) {
-        Assert.notNull(restaurant, "meal must not be null");
+        Assert.notNull(restaurant, "restaurant must not be null");
         Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(resId), resId);
-        HistoryRestaurant historyRestaurant = new HistoryRestaurant(resId, oldRestaurant.getName(),
-                oldRestaurant.getVotes(), oldRestaurant.getMenu(), new Date());
-        historyRepository.saveInHistory(historyRestaurant);
+        saveInHistory(oldRestaurant);
         restaurantRepository.create(restaurant);
     }
 
@@ -77,11 +78,27 @@ public class RestaurantService {
         userService.update(user);
     }
 
+//    @CacheEvict(value = "restaurants", allEntries = true)
+//    public void addDish(int id, Dish... dishes){
+//        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+//        Assert.notNull(dishes, "dishes must not be null");
+//        Set<Dish> menu = restaurant.getMenu();
+//        menu.addAll(Arrays.asList(dishes));
+//        saveInHistory(restaurant);
+//        restaurantRepository.create(restaurant);
+//    }
+
     private boolean canVote(Date lastVote) {
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime voteDate = lastVote.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
         return !(currentDate.toLocalDate().equals(voteDate.toLocalDate()) && currentDate.getHour() > 11);
+    }
+
+    private void saveInHistory(Restaurant restaurant){
+        HistoryRestaurant historyRestaurant = new HistoryRestaurant(restaurant.getId(), restaurant.getName(),
+                restaurant.getVotes(), restaurant.getMenu(), new Date());
+        historyRepository.saveInHistory(historyRestaurant);
     }
 }
