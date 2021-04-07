@@ -1,11 +1,10 @@
 package co.uk.golunch.service;
 
-import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.HistoryRestaurant;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.User;
-import co.uk.golunch.repository.RestaurantRepository;
-import co.uk.golunch.repository.datajpa.DataJpaHistoryRepository;
+import co.uk.golunch.repository.DataJpaHistoryRepository;
+import co.uk.golunch.repository.DataJpaRestaurantRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,22 +12,20 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static co.uk.golunch.util.ValidationUtil.*;
 
 @Service
 public class RestaurantService {
 
-    private final RestaurantRepository restaurantRepository;
+    private final DataJpaRestaurantRepository restaurantRepository;
     private final UserService userService;
     private final DataJpaHistoryRepository historyRepository;
 
-    public RestaurantService(RestaurantRepository repository, UserService userService, DataJpaHistoryRepository historyRepository) {
-        this.restaurantRepository = repository;
+    public RestaurantService(DataJpaRestaurantRepository restaurantRepository, UserService userService, DataJpaHistoryRepository historyRepository) {
+        this.restaurantRepository = restaurantRepository;
         this.userService = userService;
         this.historyRepository = historyRepository;
     }
@@ -40,9 +37,7 @@ public class RestaurantService {
     @CacheEvict(value = "restaurants", allEntries = true)
     public boolean delete(int id) {
         Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
-        HistoryRestaurant historyRestaurant = new HistoryRestaurant(id, oldRestaurant.getName(),
-                oldRestaurant.getVotes(), oldRestaurant.getMenu(), new Date());
-        historyRepository.saveInHistory(historyRestaurant);
+        saveInHistory(oldRestaurant);
         return restaurantRepository.delete(id);
     }
 
@@ -56,6 +51,7 @@ public class RestaurantService {
         Assert.notNull(restaurant, "restaurant must not be null");
         Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(resId), resId);
         saveInHistory(oldRestaurant);
+        restaurantRepository.cleanVotes(resId);
         restaurantRepository.create(restaurant);
     }
 
@@ -77,6 +73,8 @@ public class RestaurantService {
         user.setVoted(new Date());
         userService.update(user);
     }
+
+
 
 //    @CacheEvict(value = "restaurants", allEntries = true)
 //    public void addDish(int id, Dish... dishes){

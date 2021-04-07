@@ -1,4 +1,4 @@
-package co.uk.golunch.repository.datajpa;
+package co.uk.golunch.repository;
 
 import co.uk.golunch.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

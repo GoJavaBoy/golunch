@@ -123,7 +123,6 @@ public class User extends AbstractNamedEntity {
                 ", password='" + password + '\'' +
                 ", registered=" + registered +
                 ", voted=" + voted +
-                ", restaurant=" + restaurant +
                 ", roles=" + roles +
                 '}';
     }

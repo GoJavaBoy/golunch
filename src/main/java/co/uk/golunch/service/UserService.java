@@ -1,7 +1,7 @@
 package co.uk.golunch.service;
 
 import co.uk.golunch.model.User;
-import co.uk.golunch.repository.UserRepository;
+import co.uk.golunch.repository.DataJpaUserRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final DataJpaUserRepository repository;
 
-    public UserService(UserRepository repository) {
+    public UserService(DataJpaUserRepository repository) {
         this.repository = repository;
     }
 
@@ -27,7 +27,7 @@ public class UserService {
         return repository.create(user);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(cacheNames = {"users", "restaurants"}, allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }

@@ -1,14 +1,13 @@
-package co.uk.golunch.repository.datajpa;
+package co.uk.golunch.repository;
 
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.repository.RestaurantRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class DataJpaRestaurantRepository implements RestaurantRepository {
+public class DataJpaRestaurantRepository {
 
     private final CrudRestaurantRepository crudRestaurantRepository;
 
@@ -16,25 +15,25 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
         this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
-    @Override
     @Transactional
     public Restaurant create(Restaurant restaurant) {
         return crudRestaurantRepository.save(restaurant);
     }
 
-    @Override
     public Restaurant get(int id) {
         return crudRestaurantRepository.findById(id)
                 .orElse(null);
     }
 
-    @Override
     public boolean delete(int id) {
         return crudRestaurantRepository.delete(id) != 0;
     }
 
-    @Override
     public List<Restaurant> getAll() {
         return crudRestaurantRepository.findAll();
+    }
+
+    public void cleanVotes(int resId) {
+        crudRestaurantRepository.cleanVotes(resId);
     }
 }

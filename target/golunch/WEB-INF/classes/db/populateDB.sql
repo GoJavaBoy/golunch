@@ -23,6 +23,7 @@ VALUES ('User', 'user@yandex.ru', 'password', 100001),
 INSERT INTO user_roles (role, user_id)
 VALUES ('USER', 100005),
        ('ADMIN', 100006),
+       ('USER', 100006),
        ('USER', 100007),
        ('USER', 100008),
        ('USER', 100009),

@@ -15,8 +15,8 @@
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
 
-    <context:component-scan base-package="co.uk.golunch.**.repository.datajpa"/>
-    <jpa:repositories base-package="co.uk.golunch.**.repository.datajpa"/>
+    <context:component-scan base-package="co.uk.golunch.**.repository"/>
+    <jpa:repositories base-package="co.uk.golunch.**.repository"/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="${jdbc.initLocation}"/>
