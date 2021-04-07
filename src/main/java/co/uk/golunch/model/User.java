@@ -1,10 +1,8 @@
 package co.uk.golunch.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -129,6 +127,4 @@ public class User extends AbstractNamedEntity {
                 ", roles=" + roles +
                 '}';
     }
-
-
 }

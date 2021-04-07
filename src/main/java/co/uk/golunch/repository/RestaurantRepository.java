@@ -1,10 +1,6 @@
 package co.uk.golunch.repository;
 
-import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,5 +15,4 @@ public interface RestaurantRepository {
     boolean delete(int id);
 
     List<Restaurant> getAll();
-
 }

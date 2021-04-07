@@ -1,10 +1,6 @@
 package co.uk.golunch.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -23,8 +19,8 @@ public class Restaurant extends AbstractNamedEntity {
    })
     private Set<Dish> menu;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
-    private Set<User> votesWithUser;
+//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+//    private Set<User> votesWithUser;
 
     //Counting votes without initialize votesWithUser
     @Formula("(select count(*) from users where users.restaurant_id = id)")
