@@ -1,14 +1,8 @@
 package co.uk.golunch.model;
 
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 @Entity

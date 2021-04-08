@@ -1,8 +1,5 @@
 package co.uk.golunch.model;
 
-import org.hibernate.Hibernate;
-import org.springframework.util.Assert;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

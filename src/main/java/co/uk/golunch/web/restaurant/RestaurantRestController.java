@@ -1,6 +1,5 @@
 package co.uk.golunch.web.restaurant;
 
-import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.service.RestaurantService;
 import co.uk.golunch.web.SecurityUtil;
