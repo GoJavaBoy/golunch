@@ -8,6 +8,7 @@ import co.uk.golunch.repository.DataJpaRestaurantRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
@@ -62,6 +63,7 @@ public class RestaurantService {
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
+    @Transactional
     public void vote(int userId, int resId) {
         User user = userService.get(userId);
         Date lastVote = user.getVoted();

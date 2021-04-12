@@ -67,7 +67,7 @@ public class RestaurantRestController {
         restaurantService.delete(id);
     }
 
-    @PutMapping("/{id}/vote")
+    @PatchMapping("/{id}/vote")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void vote(@PathVariable int id) {
         int userId = SecurityUtil.authUserId();

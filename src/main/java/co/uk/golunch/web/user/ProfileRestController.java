@@ -29,4 +29,9 @@ public class ProfileRestController extends AbstractUserController {
     public void update(@RequestBody User user) {
         super.update(user, authUserId());
     }
+
+    @GetMapping("/with-restaurant")
+    public User getWithRestaurant() {
+        return super.getWithRestaurant(authUserId());
+    }
 }

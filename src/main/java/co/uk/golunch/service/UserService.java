@@ -2,8 +2,13 @@ package co.uk.golunch.service;
 
 import co.uk.golunch.model.User;
 import co.uk.golunch.repository.DataJpaUserRepository;
+import co.uk.golunch.web.AuthorizedUser;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -12,8 +17,9 @@ import java.util.List;
 import static co.uk.golunch.util.ValidationUtil.checkNotFound;
 import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserService {
+@Service("userService")
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class UserService implements UserDetailsService {
 
     private final DataJpaUserRepository repository;
 
@@ -52,4 +58,16 @@ public class UserService {
         checkNotFoundWithId(repository.create(user), user.id());
     }
 
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(user);
+    }
+
+    public User getWithRestaurant(int id){
+        return checkNotFoundWithId(repository.getWithRestaurant(id), id);
+    }
 }
