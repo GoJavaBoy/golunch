@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static co.uk.golunch.UserTestData.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,15 +19,15 @@ public class UserServiceTest extends AbstractServiceTest {
     @Autowired
     protected UserService service;
 
-//    @Test
-//    void create() {
-//        User created = service.create(getNew());
-//        int newId = created.id();
-//        User newUser = getNew();
-//        newUser.setId(newId);
-//        USER_MATCHER.assertMatch(created, newUser);
-//        USER_MATCHER.assertMatch(service.get(newId), newUser);
-//    }
+    @Test
+    void create() {
+        User created = service.create(getNew());
+        int newId = created.id();
+        User newUser = getNew();
+        newUser.setId(newId);
+        USER_MATCHER.assertMatch(created, newUser);
+        USER_MATCHER.assertMatch(service.get(newId), newUser);
+    }
 
     @Test
     void duplicateMailCreate() {
@@ -65,33 +63,23 @@ public class UserServiceTest extends AbstractServiceTest {
         USER_MATCHER.assertMatch(user, admin);
     }
 
-//    @Test
-//    void update() {
-//        User updated = getUpdated();
-//        service.update(updated);
-//        USER_MATCHER.assertMatch(service.get(USER_ID), getUpdated());
-//    }
+    @Test
+    void update() {
+        User updated = getUpdated();
+        service.update(updated);
+        USER_MATCHER.assertMatch(service.get(USER_ID), getUpdated());
+    }
 
     @Test
     void getAll() {
         List<User> all = service.getAll();
-        USER_MATCHER.assertMatch(all, admin, user);
+        USER_MATCHER.assertMatch(all, user, admin, user1, user2, user3, user4, user5); // I suppose to sort both collections but I leave it...
     }
 
     @Test
     void createWithException() throws Exception {
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "  ", "password", Role.USER)));
-   //     validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
-  //      validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "password", 9, true, new Date(), Set.of())));
-  //      validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "password", 10001, true, new Date(), Set.of())));
+        validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
     }
-
-//    @Test
-//    void enable() {
-//        service.enable(USER_ID, false);
-//        assertFalse(service.get(USER_ID).isEnabled());
-//        service.enable(USER_ID, true);
-//        assertTrue(service.get(USER_ID).isEnabled());
-//    }
 }

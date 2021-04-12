@@ -43,7 +43,7 @@ VALUES (100000, 'Chicken Burger', 12.99),
        (100001, 'Fanta', 1.99),
 
        (100002, 'Salmon Poke', 5.99),
-       (100002, 'Avokado Poke', 5.99),
+       (100002, 'Avocado Poke', 5.99),
        (100002, 'Ginger Shot', 5.99),
 
        (100003, 'Thai Pad', 15.85),
@@ -52,8 +52,8 @@ VALUES (100000, 'Chicken Burger', 12.99),
        (100003, 'Thai Drink', 2.99),
 
        (100004, 'Deal for One', 15.20),
-       (100004, 'Potatoes with Avokado', 8.90),
-       (100004, 'Beaf on Grill', 7.25),
+       (100004, 'Potatoes with Avocado', 8.90),
+       (100004, 'Beef on Grill', 7.25),
        (100004, 'Lemon Juice', 3.25);
 
 -- INSERT INTO restaurant_votes (restaurant_id, voted_user_id)
