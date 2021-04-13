@@ -88,7 +88,7 @@ public class RestaurantService {
 //        restaurantRepository.create(restaurant);
 //    }
 
-    private boolean canVote(Date lastVote) {
+    protected boolean canVote(Date lastVote) {
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime voteDate = lastVote.toInstant()
                 .atZone(ZoneId.systemDefault())
