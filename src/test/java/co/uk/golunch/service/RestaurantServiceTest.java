@@ -95,8 +95,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     void changeUserMindRecheckVotes() { //Recount votes if user change mind
-        //Before vote
         User user = userService.get(USER_ID);
+        //Before vote
         int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 0);
         restaurantService.vote(user.id(), USER_RESTAURANT_FIVE_GUYS_ID);
