@@ -4,6 +4,7 @@ import co.uk.golunch.UserTestData;
 import co.uk.golunch.model.Role;
 import co.uk.golunch.model.User;
 import co.uk.golunch.util.exception.NotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -81,5 +82,17 @@ public class UserServiceTest extends AbstractServiceTest {
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "  ", "password", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
+    }
+
+    @Test
+    void getWithRestaurant() {
+        User admin = service.getWithRestaurant(ADMIN_ID);
+        USER_WITH_RESTAURANT_MATCHER.assertMatch(admin, UserTestData.admin);
+    }
+
+    @Test
+    void getWithRestaurantNotFound() {
+        Assertions.assertThrows(NotFoundException.class,
+                () -> service.getWithRestaurant(1));
     }
 }

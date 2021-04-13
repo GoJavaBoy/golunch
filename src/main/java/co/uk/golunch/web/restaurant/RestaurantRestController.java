@@ -33,7 +33,7 @@ public class RestaurantRestController {
     public void update(@PathVariable int id, @RequestBody Restaurant restaurant) {
             log.info("update restaurant {} with id {}", restaurant, id);
             assureIdConsistent(restaurant, id);
-            restaurantService.update(restaurant, id);
+            restaurantService.update(restaurant);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

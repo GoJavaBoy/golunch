@@ -42,7 +42,7 @@ public class JspRestaurantController {
         if (StringUtils.hasLength(request.getParameter("id"))) {
             log.info("update restaurant {} with id {}", restaurant, getId(request));
             assureIdConsistent(restaurant, getId(request));
-            restaurantService.update(restaurant, getId(request));
+            restaurantService.update(restaurant);
         } else {
             log.info("create restaurant {}", restaurant);
             checkNew(restaurant);
