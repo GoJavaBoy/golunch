@@ -18,7 +18,6 @@ interface CrudRestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
     @Modifying
     @Transactional
-   // @Query("DELETE FROM User u WHERE u.restaurant.id=:resId")
     @Query("UPDATE User u SET u.restaurant = null WHERE u.restaurant.id=:resId")
     void cleanVotes(@Param("resId") int resId);
 }

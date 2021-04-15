@@ -1,10 +1,12 @@
 package co.uk.golunch.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 import javax.persistence.*;
 import java.util.Set;
+import org.hibernate.annotations.Cache;
 
-
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
 public class Restaurant extends AbstractNamedEntity {

@@ -36,8 +36,9 @@ public class RestaurantService {
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
+    @Transactional
     public boolean delete(int id) {
-        Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        Restaurant oldRestaurant = get(id);
         saveInHistory(oldRestaurant);
         return restaurantRepository.delete(id);
     }
@@ -48,9 +49,10 @@ public class RestaurantService {
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
+    @Transactional
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        Restaurant oldRestaurant = checkNotFoundWithId(restaurantRepository.get(restaurant.id()), restaurant.id());
+        Restaurant oldRestaurant = get(restaurant.id());
         saveInHistory(oldRestaurant);
         restaurantRepository.cleanVotes(restaurant.id());
         restaurantRepository.create(restaurant);
