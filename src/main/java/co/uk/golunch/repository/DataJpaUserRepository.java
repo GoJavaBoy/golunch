@@ -16,7 +16,7 @@ public class DataJpaUserRepository {
     }
 
     @Transactional
-    public User create(User user) {
+    public User save(User user) {
         return crudJpaUserRepository.save(user);
     }
 
