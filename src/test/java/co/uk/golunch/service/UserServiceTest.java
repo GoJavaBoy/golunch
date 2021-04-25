@@ -95,4 +95,5 @@ public class UserServiceTest extends AbstractServiceTest {
         Assertions.assertThrows(NotFoundException.class,
                 () -> service.getWithRestaurant(1));
     }
+
 }

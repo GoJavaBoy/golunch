@@ -140,6 +140,20 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         } else {
             assertTrue(restaurantService.canVote(lastVoteToday)); //If it is after 11:00 vote can be changed
         }
+    }
 
+    @Test
+    void deleteNotFound() {
+        assertThrows(NotFoundException.class, () -> restaurantService.delete(NOT_FOUND));
+    }
+
+    @Test
+    void getNotFound() {
+        assertThrows(NotFoundException.class, () -> restaurantService.get(NOT_FOUND));
+    }
+
+    @Test
+    void voteNotFound() {
+        assertThrows(NotFoundException.class, () -> restaurantService.vote(USER_ID, NOT_FOUND));
     }
 }
