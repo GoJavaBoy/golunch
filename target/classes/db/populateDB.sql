@@ -12,13 +12,13 @@ VALUES ('Five Guys'),
        ('Eat Active');
 
 INSERT INTO users (name, email, password, restaurant_id)
-VALUES ('User', 'user@yandex.ru', 'password', 100001),
-       ('Admin', 'admin@gmail.com', 'admin', 100002),
-       ('User1', 'user1@yandex.ru', 'password', 100004),
-       ('User2', 'user2@yandex.ru', 'password', 100001),
-       ('User3', 'user3@yandex.ru', 'password', 100003),
-       ('User4', 'user4@yandex.ru', 'password', 100003),
-       ('User5', 'user5@yandex.ru', 'password', 100003);
+VALUES ('User', 'user@yandex.ru', '{noop}password', 100001),
+       ('Admin', 'admin@gmail.com', '{noop}admin', 100002),
+       ('User1', 'user1@yandex.ru', '{noop}password', 100004),
+       ('User2', 'user2@yandex.ru', '{noop}password', 100001),
+       ('User3', 'user3@yandex.ru', '{noop}password', 100003),
+       ('User4', 'user4@yandex.ru', '{noop}password', 100003),
+       ('User5', 'user5@yandex.ru', '{noop}password', 100003);
 
 INSERT INTO user_roles (role, user_id)
 VALUES ('USER', 100005),

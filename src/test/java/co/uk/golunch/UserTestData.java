@@ -13,7 +13,7 @@ import static co.uk.golunch.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTestData {
-    public static final TestMatcher<User> USER_MATCHER = TestMatcher.usingIgnoringFieldsComparator(User.class, "registered", "restaurant");
+    public static final TestMatcher<User> USER_MATCHER = TestMatcher.usingIgnoringFieldsComparator(User.class, "registered", "restaurant", "password");
     public static TestMatcher<User> USER_WITH_RESTAURANT_MATCHER =
             TestMatcher.usingAssertions(User.class,
 //     No need use ignoringAllOverriddenEquals, see https://assertj.github.io/doc/#breaking-changes
@@ -21,7 +21,7 @@ public class UserTestData {
                         @Override
                         public void accept(User a, User e) {
                             assertThat(a).usingRecursiveComparison()
-                                    .ignoringFields("registered").isEqualTo(e);
+                                    .ignoringFields("registered", "password").isEqualTo(e);
                         }
                     },
                     new BiConsumer<>() {
