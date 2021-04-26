@@ -29,7 +29,7 @@ CREATE TABLE restaurant_menu
     restaurant_id INTEGER NOT NULL,
     name VARCHAR NOT NULL,
     price DECIMAL NOT NULL,
-    CONSTRAINT name_price_idx UNIQUE (name, price),
+--     CONSTRAINT name_price_idx UNIQUE (name, price),
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
 );
 

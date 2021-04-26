@@ -28,6 +28,10 @@ public class Restaurant extends AbstractNamedEntity {
     @Formula("(select count(*) from users where users.restaurant_id = id)")
     private int votes;
 
+    public Restaurant(Restaurant restaurant){
+        this(restaurant.getId(), restaurant.getName());
+    }
+
     public Restaurant(Integer id, String name) {
         super(id, name);
     }

@@ -27,7 +27,7 @@ public class ExceptionInfoHandler {
 
 
     private static final Set<String> CONSTRAINS_SET = Set.of(
-            "users_unique_email_idx", "meals_unique_user_datetime_idx");
+            "users_unique_email_idx", "restaurant_name_idx", "null value in column \"price\"");
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorInfo> handleError(HttpServletRequest req, NotFoundException e) {
@@ -48,12 +48,7 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true, CONFLICT);
     }
 
-    @ExceptionHandler(BindException.class)
-    public ResponseEntity<ErrorInfo> bindValidationError(HttpServletRequest req, BindException e) {
-        return logAndGetErrorInfo(req, e, false, UNPROCESSABLE_ENTITY);
-    }
-
-    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class})
+    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, BindException.class})
     public ResponseEntity<ErrorInfo> illegalRequestDataError(HttpServletRequest req, Exception e) {
         return logAndGetErrorInfo(req, e, false, UNPROCESSABLE_ENTITY);
     }

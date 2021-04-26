@@ -1,5 +1,7 @@
 package co.uk.golunch.model;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,7 @@ public class Dish {
     private String name;
 
     @NotNull
+    @NumberFormat
     private BigDecimal price;
 
     public Dish() {

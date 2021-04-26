@@ -1,7 +1,10 @@
 package co.uk.golunch.web.restaurant;
 
 import co.uk.golunch.RestaurantTestData;
+import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
+import co.uk.golunch.model.Role;
+import co.uk.golunch.model.User;
 import co.uk.golunch.service.RestaurantService;
 import co.uk.golunch.util.exception.NotFoundException;
 import co.uk.golunch.web.AbstractControllerTest;
@@ -10,7 +13,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,10 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 import static co.uk.golunch.TestUtil.readFromJson;
 import static co.uk.golunch.TestUtil.userHttpBasic;
 import static co.uk.golunch.RestaurantTestData.*;
-import static co.uk.golunch.UserTestData.admin;
+import static co.uk.golunch.UserTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -41,7 +46,7 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        Restaurant updated = getUpdated();
+        Restaurant updated = RestaurantTestData.getUpdated();
         perform(MockMvcRequestBuilders.put(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(JsonUtil.writeValue(updated)))
@@ -108,8 +113,70 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
         entityManager.clear();
         Assertions.assertEquals((userRestaurantFiveGuys.getVotes() + 1), service.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes());
     }
-}
 
-//сделать тесты на update ресторана на уникальность
-//8: уделяйте внимание обработке ошибок
-//(один голос пользователя в день, один уникальный пункт меню в день). Следите за порядком полей в индексе
+    @Test
+    void createInvalid() throws Exception {
+        Restaurant invalid = new Restaurant("");
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    void updateInvalid() throws Exception {
+        Restaurant invalid = new Restaurant(adminRestaurantHoniPoke);
+        invalid.setName("");
+        perform(MockMvcRequestBuilders.put(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    void createDuplicate() throws Exception {
+        Restaurant invalid = new Restaurant("Five Guys");
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    void updateDuplicate() throws Exception {
+        Restaurant invalid = new Restaurant(adminRestaurantHoniPoke);
+        invalid.setName("Five Guys");
+        perform(MockMvcRequestBuilders.put(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    void createInvalidMenu() throws Exception {
+        Restaurant invalid = new Restaurant(adminRestaurantHoniPoke);
+        invalid.setMenu(Set.of(
+                new Dish("Salmon Poke", null),
+                new Dish("Avocado Poke", new BigDecimal("5.99")),
+                new Dish("Ginger Shot", new BigDecimal("5.99"))
+        ));
+        perform(MockMvcRequestBuilders.put(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+}
