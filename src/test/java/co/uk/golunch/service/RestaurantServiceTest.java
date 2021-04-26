@@ -5,8 +5,12 @@ import co.uk.golunch.RestaurantTestData;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.User;
 import co.uk.golunch.util.exception.NotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -18,6 +22,7 @@ import static co.uk.golunch.RestaurantTestData.*;
 import static co.uk.golunch.RestaurantTestData.getUpdated;
 import static co.uk.golunch.RestaurantTestData.getNew;
 import static co.uk.golunch.UserTestData.USER_ID;
+import static co.uk.golunch.model.AbstractBaseEntity.START_SEQ;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -36,9 +41,16 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    // https://stackoverflow.com/questions/27776919/transaction-rollback-after-catching-exception
+    @Transactional(rollbackFor = NotFoundException.class)
     void delete() {
-        restaurantService.delete(USER_RESTAURANT_FIVE_GUYS_ID);
-        assertThrows(NotFoundException.class, () -> restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID));
+        try {
+            restaurantService.delete(ADMIN_RESTAURANT_HONI_POKE_ID);
+            restaurantService.get(ADMIN_RESTAURANT_HONI_POKE_ID);
+        } catch (Exception e){
+            assertTrue(e instanceof NotFoundException);
+            throw e;
+        }
     }
 
     @Test
@@ -49,6 +61,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    @Transactional
     void update() {
         Restaurant updated = getUpdated();
         restaurantService.update(updated);
@@ -68,10 +81,9 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test
     void vote() {
         //Before vote
-        User user = userService.get(USER_ID);
         int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 0);
-        restaurantService.vote(user.id(), USER_RESTAURANT_FIVE_GUYS_ID);
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
         //After vote
         votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 1);
@@ -80,10 +92,9 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test
     void deleteUserRecheckVotes() { //Not counting deleted user votes
         //Before vote
-        User user = userService.get(USER_ID);
         int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 0);
-        restaurantService.vote(user.id(), USER_RESTAURANT_FIVE_GUYS_ID);
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
         //After vote
         votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 1);
@@ -94,29 +105,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void changeUserMindRecheckVotes() { //Recount votes if user change mind
-        User user = userService.get(USER_ID);
-        //Before vote
-        int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
-        assertEquals(votes, 0);
-        restaurantService.vote(user.id(), USER_RESTAURANT_FIVE_GUYS_ID);
-        //After vote
-        votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
-        assertEquals(votes, 1);
-        //Change mind and recheck votes.
-        restaurantService.vote(user.id(), ADMIN_RESTAURANT_HONI_POKE_ID);
-        votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
-        if ( LocalDateTime.now().getHour() > 11){
-            assertEquals(votes, 1); //If it is after 11:00 changes not happen
-        } else {
-            assertEquals(votes, 0); //If it is before 11:00 changes happen
-        }
-    }
-
-    @Test
     void updateRecheckVotes() { //Remove all votes if restaurant been updated
-        User user = userService.get(USER_ID);
-        restaurantService.vote(user.id(), USER_RESTAURANT_FIVE_GUYS_ID);
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
         int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
         assertEquals(votes, 1);
         Restaurant updated = getUpdated();
@@ -139,6 +129,49 @@ public class RestaurantServiceTest extends AbstractServiceTest {
             assertFalse(restaurantService.canVote(lastVoteToday)); //If it is after 11:00 vote can't be changed
         } else {
             assertTrue(restaurantService.canVote(lastVoteToday)); //If it is after 11:00 vote can be changed
+        }
+    }
+
+    @Test
+    void oneVotePerUser() {
+        //Before vote
+        int votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
+        assertEquals(votes, 0);
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
+        //After vote
+        votes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
+        assertEquals(votes, 1);
+    }
+
+    @Test
+    void changeMindIfBefore11() {
+        //Before vote
+        int firstRestVotes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
+        assertEquals(firstRestVotes, 0);
+        int secondRestVotes = restaurantService.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes();
+        assertEquals(secondRestVotes, 1);
+
+        //Vote first time
+        restaurantService.vote(USER_ID, USER_RESTAURANT_FIVE_GUYS_ID);
+        firstRestVotes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
+        assertEquals(firstRestVotes, 1);
+
+        //Change mind and vote second time
+        restaurantService.vote(USER_ID, ADMIN_RESTAURANT_HONI_POKE_ID);
+
+        //Check
+        secondRestVotes = restaurantService.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes();
+        firstRestVotes = restaurantService.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes();
+        LocalDateTime today = new Date().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        if (today.getHour() < 11){ // If before 11 remove vote from old restaurant and add to new
+            assertEquals(firstRestVotes, 0);
+            assertEquals(secondRestVotes, 2);
+        } else { // No changes
+            assertEquals(firstRestVotes, 1);
+            assertEquals(secondRestVotes, 1);
         }
     }
 

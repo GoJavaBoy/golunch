@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import static co.uk.golunch.TestUtil.readFromJson;
 import static co.uk.golunch.TestUtil.userHttpBasic;
@@ -34,7 +36,7 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
     @Autowired
     private RestaurantService service;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Test
@@ -97,12 +99,13 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @Transactional(propagation = Propagation.NEVER)
     void vote() throws Exception {
         perform(MockMvcRequestBuilders.patch(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID + "/vote")
                 .with(userHttpBasic(admin)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
+        entityManager.flush();
+        entityManager.clear();
         Assertions.assertEquals((userRestaurantFiveGuys.getVotes() + 1), service.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes());
     }
 }

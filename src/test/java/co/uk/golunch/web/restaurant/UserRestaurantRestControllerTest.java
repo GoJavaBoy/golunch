@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -30,6 +32,9 @@ class UserRestaurantRestControllerTest extends AbstractControllerTest {
 
     @Autowired
     private RestaurantService service;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
     void getAll() throws Exception {
@@ -54,12 +59,13 @@ class UserRestaurantRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @Transactional(propagation = Propagation.NEVER)
     void vote() throws Exception {
         perform(MockMvcRequestBuilders.patch(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID + "/vote")
                 .with(userHttpBasic(user)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
+        entityManager.flush();
+        entityManager.clear();
         Assertions.assertEquals((adminRestaurantHoniPoke.getVotes() + 1), service.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes());
     }
 
@@ -73,49 +79,5 @@ class UserRestaurantRestControllerTest extends AbstractControllerTest {
     void voteUnAuth() throws Exception {
         perform(MockMvcRequestBuilders.patch(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID + "/vote"))
                 .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    @Transactional(propagation = Propagation.NEVER)
-    void oneVotePerUser() throws Exception {
-        //Same user try to vote for same restaurant. Nothing happen.
-        perform(MockMvcRequestBuilders.patch(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID + "/vote")
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        perform(MockMvcRequestBuilders.patch(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID + "/vote")
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        Assertions.assertEquals((adminRestaurantHoniPoke.getVotes() + 1), service.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes());
-    }
-
-    @Test
-    @Transactional(propagation = Propagation.NEVER)
-    void changeMindIfBefore11() throws Exception {
-        //Vote first time
-        perform(MockMvcRequestBuilders.patch(REST_URL + ADMIN_RESTAURANT_HONI_POKE_ID + "/vote")
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        Assertions.assertEquals((adminRestaurantHoniPoke.getVotes() + 1), service.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes());
-
-        //Change mind and vote second time
-        perform(MockMvcRequestBuilders.patch(REST_URL + userRestaurantRosaThai.getId() + "/vote")
-                .with(userHttpBasic(user)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-
-        //Check
-        LocalDateTime today = new Date().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-        if (today.getHour() < 11){ // If before 11 remove vote from old restaurant and add to new
-            Assertions.assertEquals((userRestaurantRosaThai.getVotes() + 1), service.get(START_SEQ + 3).getVotes());
-            Assertions.assertEquals((adminRestaurantHoniPoke.getVotes()), service.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes());
-        } else { // No changes
-            Assertions.assertEquals(userRestaurantRosaThai.getVotes(), service.get(START_SEQ + 3).getVotes());
-            Assertions.assertEquals((adminRestaurantHoniPoke.getVotes() + 1), service.get(ADMIN_RESTAURANT_HONI_POKE_ID).getVotes());
-        }
     }
 }

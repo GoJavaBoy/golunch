@@ -2,6 +2,7 @@ package co.uk.golunch;
 
 import co.uk.golunch.model.Role;
 import co.uk.golunch.model.User;
+import co.uk.golunch.web.json.JsonUtil;
 
 import java.util.Collections;
 import java.util.Date;
@@ -64,5 +65,9 @@ public class UserTestData {
         updated.setPassword("newPass");
         updated.setRoles(Collections.singletonList(Role.ADMIN));
         return updated;
+    }
+
+    public static String jsonWithPassword(User user, String passw) {
+        return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }
