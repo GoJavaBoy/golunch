@@ -47,6 +47,10 @@ public class UserService implements UserDetailsService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
+    public User getWithRestaurant(int id){
+        return checkNotFoundWithId(repository.getWithRestaurant(id), id);
+    }
+
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
@@ -70,10 +74,6 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User " + email + " is not found");
         }
         return new AuthorizedUser(user);
-    }
-
-    public User getWithRestaurant(int id){
-        return checkNotFoundWithId(repository.getWithRestaurant(id), id);
     }
 
     private User prepareAndSave(User user) {

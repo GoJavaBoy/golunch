@@ -6,7 +6,6 @@ import co.uk.golunch.web.json.JsonUtil;
 
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.function.BiConsumer;
 
 import static co.uk.golunch.RestaurantTestData.*;

@@ -1,13 +1,37 @@
 package co.uk.golunch.util;
 
 
+import co.uk.golunch.model.AbstractBaseEntity;
 import co.uk.golunch.model.AbstractNamedEntity;
+import co.uk.golunch.util.exception.IllegalRequestDataException;
 import co.uk.golunch.util.exception.NotFoundException;
+import org.slf4j.Logger;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.*;
+import java.util.Set;
+
 public class ValidationUtil {
+    private static final Validator validator;
+
+    static {
+        //  From Javadoc: implementations are thread-safe and instances are typically cached and reused.
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        //  From Javadoc: implementations of this interface must be thread-safe
+        validator = factory.getValidator();
+    }
+
     private ValidationUtil() {
+    }
+
+    public static <T> void validate(T bean) {
+        // https://alexkosarev.name/2018/07/30/bean-validation-api/
+        Set<ConstraintViolation<T>> violations = validator.validate(bean);
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
     }
 
     public static <T> T checkNotFoundWithId(T object, int id) {
@@ -30,18 +54,18 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkNew(AbstractNamedEntity entity) {
-        if (!entity.isNew()) {
-            throw new IllegalArgumentException(entity + " must be new (id=null)");
+    public static void checkNew(AbstractBaseEntity bean) {
+        if (!bean.isNew()) {
+            throw new IllegalRequestDataException(bean + " must be new (id=null)");
         }
     }
 
-    public static void assureIdConsistent(AbstractNamedEntity entity, int id) {
+    public static void assureIdConsistent(AbstractBaseEntity bean, int id) {
 //      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
-        if (entity.isNew()) {
-            entity.setId(id);
-        } else if (entity.id() != id) {
-            throw new IllegalArgumentException(entity + " must be with id=" + id);
+        if (bean.isNew()) {
+            bean.setId(id);
+        } else if (bean.id() != id) {
+            throw new IllegalRequestDataException(bean + " must be with id=" + id);
         }
     }
 
@@ -50,5 +74,19 @@ public class ValidationUtil {
     public static Throwable getRootCause(@NonNull Throwable t) {
         Throwable rootCause = NestedExceptionUtils.getRootCause(t);
         return rootCause != null ? rootCause : t;
+    }
+
+    public static String getMessage(Throwable e) {
+        return e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getClass().getName();
+    }
+
+    public static Throwable logAndGetRootCause(Logger log, HttpServletRequest req, Exception e, boolean logStackTrace) {
+        Throwable rootCause = ValidationUtil.getRootCause(e);
+        if (logStackTrace) {
+            log.error("request " + req.getRequestURL(), rootCause);
+        } else {
+            log.warn("request  {} : {}", req.getRequestURL(), rootCause.toString());
+        }
+        return rootCause;
     }
 }

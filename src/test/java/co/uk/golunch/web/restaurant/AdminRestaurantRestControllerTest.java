@@ -109,3 +109,7 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
         Assertions.assertEquals((userRestaurantFiveGuys.getVotes() + 1), service.get(USER_RESTAURANT_FIVE_GUYS_ID).getVotes());
     }
 }
+
+//сделать тесты на update ресторана на уникальность
+//8: уделяйте внимание обработке ошибок
+//(один голос пользователя в день, один уникальный пункт меню в день). Следите за порядком полей в индексе
