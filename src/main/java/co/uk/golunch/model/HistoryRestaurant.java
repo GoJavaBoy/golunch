@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "restaurants_history")
-public class HistoryRestaurant extends AbstractNamedEntity {
+public class HistoryRestaurant extends AbstractBaseEntity {
 
     @Column(name = "votes")
     private Integer votes;

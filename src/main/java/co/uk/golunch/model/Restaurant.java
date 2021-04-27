@@ -9,7 +9,7 @@ import org.hibernate.annotations.Cache;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
-public class Restaurant extends AbstractNamedEntity {
+public class Restaurant extends AbstractBaseEntity {
 
    @ElementCollection(fetch = FetchType.EAGER)
    @CollectionTable(name="restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))

@@ -29,11 +29,6 @@ public class ExceptionInfoHandler {
     private static final Set<String> CONSTRAINS_SET = Set.of(
             "users_unique_email_idx", "restaurant_name_idx", "null value in column \"price\"");
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorInfo> handleError(HttpServletRequest req, NotFoundException e) {
-        return logAndGetErrorInfo(req, e, false, UNPROCESSABLE_ENTITY);
-    }
-
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorInfo> conflict(HttpServletRequest req, DataIntegrityViolationException e) {
         String rootMsg = ValidationUtil.getRootCause(e).getMessage();
@@ -48,7 +43,8 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true, CONFLICT);
     }
 
-    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, BindException.class})
+    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class,
+            HttpMessageNotReadableException.class, BindException.class, NotFoundException.class})
     public ResponseEntity<ErrorInfo> illegalRequestDataError(HttpServletRequest req, Exception e) {
         return logAndGetErrorInfo(req, e, false, UNPROCESSABLE_ENTITY);
     }

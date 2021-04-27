@@ -2,7 +2,6 @@ package co.uk.golunch.util;
 
 
 import co.uk.golunch.model.AbstractBaseEntity;
-import co.uk.golunch.model.AbstractNamedEntity;
 import co.uk.golunch.util.exception.IllegalRequestDataException;
 import co.uk.golunch.util.exception.NotFoundException;
 import org.slf4j.Logger;
