@@ -4,13 +4,9 @@ import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
 
 import java.math.BigDecimal;
-import java.time.Month;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Set;
 
 import static co.uk.golunch.model.AbstractBaseEntity.START_SEQ;
-import static java.time.LocalDateTime.of;
 
 public class RestaurantTestData {
     public static final TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Restaurant.class);

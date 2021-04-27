@@ -6,7 +6,6 @@ import co.uk.golunch.model.User;
 import co.uk.golunch.service.UserService;
 import co.uk.golunch.util.exception.NotFoundException;
 import co.uk.golunch.web.AbstractControllerTest;
-import co.uk.golunch.web.json.JsonUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

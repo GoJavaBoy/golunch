@@ -22,11 +22,4 @@ public class RootController {
         model.addAttribute("users", service.getAll());
         return "users";
     }
-
-//    @PostMapping("/users")
-//    public String setUser(HttpServletRequest request) {
-//        int userId = Integer.parseInt(request.getParameter("userId"));
-//        SecurityUtil.setAuthUserId(userId);
-//        return "redirect:restaurants";
-//    }
 }

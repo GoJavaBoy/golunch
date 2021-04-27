@@ -10,7 +10,6 @@ co\uk\golunch\web\user\AdminRestController.class
 co\uk\golunch\repository\CrudJpaUserRepository.class
 co\uk\golunch\repository\CrudHistoryRepository.class
 co\uk\golunch\model\HistoryRestaurant.class
-co\uk\golunch\TestMainClass.class
 co\uk\golunch\web\restaurant\AdminRestaurantRestController.class
 co\uk\golunch\service\UserService.class
 co\uk\golunch\model\User.class

@@ -7,21 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 import static co.uk.golunch.RestaurantTestData.*;
 import static co.uk.golunch.TestUtil.userHttpBasic;
-import static co.uk.golunch.UserTestData.admin;
 import static co.uk.golunch.UserTestData.user;
-import static co.uk.golunch.model.AbstractBaseEntity.START_SEQ;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -3,8 +3,6 @@ package co.uk.golunch.web.restaurant;
 import co.uk.golunch.RestaurantTestData;
 import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.model.Role;
-import co.uk.golunch.model.User;
 import co.uk.golunch.service.RestaurantService;
 import co.uk.golunch.util.exception.NotFoundException;
 import co.uk.golunch.web.AbstractControllerTest;
