@@ -123,7 +123,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andReturn();
-        String content = result.getResponse().getContentAsString();
+        String content = result.getResponse().getContentAsString().toLowerCase();
         Assertions.assertTrue(content.contains("users_unique_email_idx"));
     }
 

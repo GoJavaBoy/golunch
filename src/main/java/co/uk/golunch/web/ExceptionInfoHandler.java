@@ -27,7 +27,7 @@ public class ExceptionInfoHandler {
 
 
     private static final Set<String> CONSTRAINS_SET = Set.of(
-            "users_unique_email_idx", "restaurant_name_idx", "null value in column \"price\"");
+            "users_unique_email_idx", "restaurant_name_idx", "restaurant_menu column: price");
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorInfo> conflict(HttpServletRequest req, DataIntegrityViolationException e) {
