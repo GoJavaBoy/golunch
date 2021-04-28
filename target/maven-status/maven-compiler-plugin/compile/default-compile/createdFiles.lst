@@ -1,6 +1,7 @@
 co\uk\golunch\repository\DataJpaUserRepository.class
 co\uk\golunch\model\Restaurant.class
 co\uk\golunch\web\json\JacksonObjectMapper.class
+co\uk\golunch\to\UserTo.class
 co\uk\golunch\web\user\ProfileRestController.class
 co\uk\golunch\model\Dish.class
 co\uk\golunch\web\user\AbstractUserController.class
@@ -9,6 +10,7 @@ co\uk\golunch\web\RootController.class
 co\uk\golunch\web\user\AdminRestController.class
 co\uk\golunch\repository\CrudJpaUserRepository.class
 co\uk\golunch\repository\CrudHistoryRepository.class
+co\uk\golunch\HasId.class
 co\uk\golunch\model\HistoryRestaurant.class
 co\uk\golunch\web\restaurant\AdminRestaurantRestController.class
 co\uk\golunch\service\UserService.class

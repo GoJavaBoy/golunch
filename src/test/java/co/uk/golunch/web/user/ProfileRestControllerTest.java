@@ -2,6 +2,8 @@ package co.uk.golunch.web.user;
 
 import co.uk.golunch.model.User;
 import co.uk.golunch.service.UserService;
+import co.uk.golunch.to.UserTo;
+import co.uk.golunch.util.UserUtil;
 import co.uk.golunch.web.AbstractControllerTest;
 import co.uk.golunch.web.json.JsonUtil;
 import org.junit.jupiter.api.Assertions;
@@ -52,14 +54,14 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        User updated = new User(user.getId(), "newName", "newemail@ya.ru", "newPassword", user.getRegistered(), user.getRoles());
+        UserTo updatedTo = new UserTo(null, "newName", "user@yandex.ru", "newPassword");
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(updated)))
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        USER_MATCHER.assertMatch(userService.get(USER_ID), updated);
+        USER_MATCHER.assertMatch(userService.get(USER_ID), UserUtil.updateFromTo(new User(user), updatedTo));
     }
 
     @Test
@@ -73,10 +75,11 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     }
     @Test
     void register() throws Exception {
-        User newUser = getNew();
+        UserTo newTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword");
+        User newUser = UserUtil.createNewFromTo(newTo);
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "/register")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(newUser)))
+                .content(JsonUtil.writeValue(newTo)))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
@@ -89,24 +92,22 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void registerInvalid() throws Exception {
-        User newUser = getNew();
-        newUser.setName(null);
-        newUser.setEmail(null);
+        UserTo newTo = new UserTo(null, null, null, null);
         perform(MockMvcRequestBuilders.post(REST_URL + "/register")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(newUser)))
+                .content(JsonUtil.writeValue(newTo)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
     void updateInvalid() throws Exception {
-        User invalidUser = getNew();
-        invalidUser.setEmail(null);
+        UserTo updatedTo = new UserTo(null, null, "password", null);
+        updatedTo.setEmail(null);
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(invalidUser)))
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -114,12 +115,11 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     @Test
     @Transactional(propagation = Propagation.NEVER)
     void updateDuplicate() throws Exception {
-        User duplicateUser = getNew();
-        duplicateUser.setEmail("admin@gmail.com");
+        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword");
 
         MvcResult result = perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(duplicateUser)))
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andReturn();
