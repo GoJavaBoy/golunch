@@ -21,9 +21,6 @@ public class Restaurant extends AbstractBaseEntity {
    })
     private Set<Dish> menu;
 
-//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
-//    private Set<User> votesWithUser;
-
     //Counting votes without initialize votesWithUser
     @Formula("(select count(*) from users where users.restaurant_id = id)")
     private int votes;

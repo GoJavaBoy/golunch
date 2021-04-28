@@ -56,10 +56,4 @@ VALUES (100000, 'Chicken Burger', 12.99),
        (100004, 'Beef on Grill', 7.25),
        (100004, 'Lemon Juice', 3.25);
 
--- INSERT INTO restaurant_votes (restaurant_id, voted_user_id)
--- VALUES (100007, 100000),
---        (100008, NULL),
---        (100009, NULL),
---        (100010, NULL),
---        (100011, NULL);
 

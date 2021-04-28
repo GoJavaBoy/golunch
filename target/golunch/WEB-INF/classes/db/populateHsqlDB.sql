@@ -56,4 +56,3 @@ VALUES (100000, 'Chicken Burger', 12.99),
        (100004, 'Beef on Grill', 7.25),
        (100004, 'Lemon Juice', 3.25);
 
-
