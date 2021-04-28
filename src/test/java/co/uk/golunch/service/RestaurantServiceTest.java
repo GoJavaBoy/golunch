@@ -44,13 +44,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     // https://stackoverflow.com/questions/27776919/transaction-rollback-after-catching-exception
     @Transactional(rollbackFor = NotFoundException.class)
     void delete() {
-        try {
-            restaurantService.delete(ADMIN_RESTAURANT_HONI_POKE_ID);
-            restaurantService.get(ADMIN_RESTAURANT_HONI_POKE_ID);
-        } catch (Exception e){
-            assertTrue(e instanceof NotFoundException);
-            throw e;
-        }
+        restaurantService.delete(ADMIN_RESTAURANT_HONI_POKE_ID);
+        assertThrows(NotFoundException.class, () -> restaurantService.get(ADMIN_RESTAURANT_HONI_POKE_ID));
     }
 
     @Test

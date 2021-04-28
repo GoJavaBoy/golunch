@@ -75,20 +75,7 @@ public class RestaurantService {
         Restaurant restaurant = get(resId);
         user.setRestaurant(restaurant);
         user.setVoted(new Date());
-        userService.update(user);
     }
-
-
-
-//    @CacheEvict(value = "restaurants", allEntries = true)
-//    public void addDish(int id, Dish... dishes){
-//        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
-//        Assert.notNull(dishes, "dishes must not be null");
-//        Set<Dish> menu = restaurant.getMenu();
-//        menu.addAll(Arrays.asList(dishes));
-//        saveInHistory(restaurant);
-//        restaurantRepository.create(restaurant);
-//    }
 
     protected boolean canVote(Date lastVote) {
         LocalDateTime currentDate = LocalDateTime.now();
