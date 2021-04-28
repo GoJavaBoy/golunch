@@ -1,5 +1,6 @@
 package co.uk.golunch.web.restaurant;
 
+import co.uk.golunch.model.HistoryRestaurant;
 import co.uk.golunch.model.Restaurant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +46,12 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         return super.getAll();
     }
 
+    @GetMapping("/history")
+    @Override
+    public List<HistoryRestaurant> getHistory() {
+        return super.getHistory();
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
@@ -59,10 +66,4 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         super.vote(id);
     }
 
-    //    @PostMapping("/{id}/menu")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void addDish(@PathVariable int id, @RequestBody Dish... dishes){
-//        log.info("add dish for restaurant {}", id);
-//        restaurantService.addDish(id, dishes);
-//    }
 }

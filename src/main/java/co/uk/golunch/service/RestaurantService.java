@@ -48,6 +48,10 @@ public class RestaurantService {
         return restaurantRepository.getAll();
     }
 
+    public List<HistoryRestaurant> getHistory() {
+        return historyRepository.getAll();
+    }
+
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public void update(Restaurant restaurant) {

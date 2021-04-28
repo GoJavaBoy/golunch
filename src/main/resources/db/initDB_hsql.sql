@@ -1,6 +1,6 @@
 DROP TABLE user_roles IF EXISTS;
-DROP TABLE restaurant_votes IF EXISTS;
 DROP TABLE restaurant_menu IF EXISTS;
+DROP TABLE IF EXISTS restaurant_menu_history;
 DROP TABLE users IF EXISTS;
 DROP TABLE restaurants IF EXISTS;
 DROP SEQUENCE global_seq IF EXISTS;

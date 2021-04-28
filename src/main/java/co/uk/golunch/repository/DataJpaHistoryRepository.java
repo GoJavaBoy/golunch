@@ -1,8 +1,11 @@
 package co.uk.golunch.repository;
 
 import co.uk.golunch.model.HistoryRestaurant;
+import co.uk.golunch.model.Restaurant;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class DataJpaHistoryRepository {
@@ -19,5 +22,9 @@ public class DataJpaHistoryRepository {
             return;
         }
         crudHistoryRepository.save(restaurant);
+    }
+
+    public List<HistoryRestaurant> getAll() {
+        return crudHistoryRepository.findAll();
     }
 }

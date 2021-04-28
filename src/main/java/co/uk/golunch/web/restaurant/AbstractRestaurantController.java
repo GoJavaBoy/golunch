@@ -1,5 +1,6 @@
 package co.uk.golunch.web.restaurant;
 
+import co.uk.golunch.model.HistoryRestaurant;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.service.RestaurantService;
 import co.uk.golunch.web.SecurityUtil;
@@ -40,6 +41,12 @@ public class AbstractRestaurantController {
         log.info("getAll");
         return restaurantService.getAll();
     }
+
+    public List<HistoryRestaurant> getHistory() {
+        log.info("getHistory");
+        return restaurantService.getHistory();
+    }
+
 
     public void delete(int id) {
         log.info("delete {}", id);

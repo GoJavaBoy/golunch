@@ -16,7 +16,7 @@ public class HistoryRestaurant extends AbstractBaseEntity {
     @NotNull
     private Date saved;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="restaurant_menu_history", joinColumns = @JoinColumn(name = "restaurant_id"))
     @AttributeOverrides({
             @AttributeOverride(name="name",
@@ -34,5 +34,29 @@ public class HistoryRestaurant extends AbstractBaseEntity {
         this.votes = votes;
         this.menu = menu;
         this.saved = date;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
+    public Date getSaved() {
+        return saved;
+    }
+
+    public void setSaved(Date saved) {
+        this.saved = saved;
+    }
+
+    public Set<Dish> getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Set<Dish> menu) {
+        this.menu = menu;
     }
 }

@@ -990,6 +990,7 @@ UC/10
     </table>
     <table id="34" parent="19" name="restaurant_menu_history">
       <ObjectId>121943</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>user</Owner>
       <StateNumber>38116</StateNumber>
     </table>

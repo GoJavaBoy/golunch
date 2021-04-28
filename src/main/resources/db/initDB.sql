@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS user_roles;
--- DROP TABLE IF EXISTS restaurant_votes;
 DROP TABLE IF EXISTS restaurant_menu;
 DROP TABLE IF EXISTS restaurant_menu_history;
 DROP TABLE IF EXISTS users;
@@ -29,7 +28,6 @@ CREATE TABLE restaurant_menu
     restaurant_id INTEGER NOT NULL,
     name VARCHAR NOT NULL,
     price DECIMAL NOT NULL,
---     CONSTRAINT name_price_idx UNIQUE (name, price),
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
 );
 
@@ -53,16 +51,6 @@ CREATE TABLE users
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE SET NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON USERS (email);
-
--- CREATE TABLE restaurant_votes
--- (
---     restaurant_id INTEGER NOT NULL,
---     voted_user_id INTEGER,
---     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE,
---     FOREIGN KEY (voted_user_id) REFERENCES USERS (id) ON DELETE CASCADE,
---     CONSTRAINT user_votes_idx UNIQUE (restaurant_id, voted_user_id)
--- );
--- CREATE UNIQUE INDEX restaurant_user_unique_idx ON restaurant_votes (restaurant_id, voted_user_id);
 
 CREATE TABLE user_roles
 (
