@@ -6,7 +6,6 @@ co\uk\golunch\web\user\ProfileRestController.class
 co\uk\golunch\model\Dish.class
 co\uk\golunch\web\user\AbstractUserController.class
 co\uk\golunch\web\json\JsonUtil.class
-co\uk\golunch\web\RootController.class
 co\uk\golunch\web\user\AdminRestController.class
 co\uk\golunch\repository\CrudJpaUserRepository.class
 co\uk\golunch\repository\CrudHistoryRepository.class

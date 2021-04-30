@@ -19,12 +19,12 @@ public class UserTo implements HasId, Serializable {
     private Integer id;
 
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 30)
     private String name;
 
     @Email
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 30)
     private String email;
 
     @NotBlank

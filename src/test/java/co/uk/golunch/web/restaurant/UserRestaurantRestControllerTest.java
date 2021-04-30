@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 
 import static co.uk.golunch.RestaurantTestData.*;
 import static co.uk.golunch.TestUtil.userHttpBasic;
+import static co.uk.golunch.UserTestData.admin;
 import static co.uk.golunch.UserTestData.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -48,6 +49,14 @@ class UserRestaurantRestControllerTest extends AbstractControllerTest {
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_MATCHER.contentJson(userRestaurantFiveGuys));
+    }
+
+    @Test
+    void getNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + NOT_FOUND)
+                .with(userHttpBasic(user)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test

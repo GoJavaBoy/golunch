@@ -2,12 +2,10 @@ package co.uk.golunch.util.exception;
 
 public class ErrorInfo {
     private final String url;
-    private final String typeMessage;
-    private final String[] details;
+    private final String message;
 
-    public ErrorInfo(CharSequence url, String typeMessage, String... details) {
+    public ErrorInfo(CharSequence url, String message) {
         this.url = url.toString();
-        this.typeMessage = typeMessage;
-        this.details = details;
+        this.message = message;
     }
 }

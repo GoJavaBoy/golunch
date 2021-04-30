@@ -58,7 +58,7 @@ public class ExceptionInfoHandler {
     private ResponseEntity<ErrorInfo> logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logStackTrace, HttpStatus status) {
         Throwable rootCause = ValidationUtil.logAndGetRootCause(log, req, e, logStackTrace);
         return ResponseEntity.status(status)
-                .body(new ErrorInfo(req.getRequestURL(), e.getMessage(), ValidationUtil.getMessage(rootCause))
+                .body(new ErrorInfo(req.getRequestURL(), ValidationUtil.getMessage(rootCause))
                 );
     }
 }

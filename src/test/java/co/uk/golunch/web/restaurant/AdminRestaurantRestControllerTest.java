@@ -23,6 +23,7 @@ import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import static co.uk.golunch.RestaurantTestData.NOT_FOUND;
 import static co.uk.golunch.TestUtil.readFromJson;
 import static co.uk.golunch.TestUtil.userHttpBasic;
 import static co.uk.golunch.RestaurantTestData.*;
@@ -79,6 +80,15 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_MATCHER.contentJson(userRestaurantFiveGuys));
     }
+
+    @Test
+    void getNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + NOT_FOUND)
+                .with(userHttpBasic(admin)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
 
     @Test
     void getAll() throws Exception {
