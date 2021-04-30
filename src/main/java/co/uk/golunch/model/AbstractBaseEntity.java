@@ -21,7 +21,7 @@ public abstract class AbstractBaseEntity implements HasId {
 
     @Column(name = "name", nullable = false)
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 30)
     protected String name;
 
     protected AbstractBaseEntity() {

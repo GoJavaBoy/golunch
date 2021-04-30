@@ -27,7 +27,7 @@ CREATE TABLE restaurant_menu
 (
     restaurant_id INTEGER NOT NULL,
     name VARCHAR(255) NOT NULL,
-    price DECIMAL NOT NULL,
+    price DECIMAL(128, 2) NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE restaurant_menu_history
 (
     restaurant_id INTEGER NOT NULL,
     name VARCHAR(255) NOT NULL,
-    price DECIMAL NOT NULL,
+    price DECIMAL(128, 2) NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS_HISTORY (id) ON DELETE CASCADE
 );
 

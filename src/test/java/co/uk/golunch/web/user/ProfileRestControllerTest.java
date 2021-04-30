@@ -45,6 +45,13 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void getForbidden() throws Exception {
+        perform(MockMvcRequestBuilders.get(AdminRestController.REST_URL)
+                .with(userHttpBasic(user)))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
     void delete() throws Exception {
         perform(MockMvcRequestBuilders.delete(REST_URL)
                 .with(userHttpBasic(user)))

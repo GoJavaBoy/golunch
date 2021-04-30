@@ -13,7 +13,7 @@ Used to create new user.
 
 ```
 {
-"name": "[1 to 30 chars]"
+"name": "[2 to 30 chars]"
 "email": "[1 to 30 chars]",
 "password": "[5 to 32 chars]"
 }

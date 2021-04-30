@@ -1,6 +1,5 @@
 package co.uk.golunch.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.BatchSize;
@@ -27,7 +26,7 @@ public class User extends AbstractBaseEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 30)
     private String email;
 
     @Column(name = "password", nullable = false)
@@ -44,7 +43,6 @@ public class User extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-   // @JsonIgnore
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private Restaurant restaurant;
 

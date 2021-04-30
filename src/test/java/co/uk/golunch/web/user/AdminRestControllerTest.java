@@ -44,6 +44,13 @@ public class AdminRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void getNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + NOT_FOUND)
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     void getWithRestaurant() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + ADMIN_ID + "/with-restaurant")
                 .with(userHttpBasic(admin)))
@@ -94,6 +101,16 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isNoContent());
 
         USER_MATCHER.assertMatch(userService.get(USER_ID), updated);
+    }
+
+    @Test
+    void updateNotExist() throws Exception {
+        User updated = UserTestData.getUpdated();
+        perform(MockMvcRequestBuilders.put(REST_URL + NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(admin))
+                .content(jsonWithPassword(updated, "updatedPas")))
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test

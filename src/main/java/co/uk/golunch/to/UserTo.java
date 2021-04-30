@@ -28,7 +28,7 @@ public class UserTo implements HasId, Serializable {
     private String email;
 
     @NotBlank
-    @Size(min = 5, max = 32)
+    @Size(min = 5, max = 100)
     private String password;
 
     public UserTo() {

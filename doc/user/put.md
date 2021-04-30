@@ -17,7 +17,7 @@ Allow the Authenticated User update their details.
 {
 "name": "[1 to 30 chars]"
 "email": "[1 to 30 chars]",
-"password": "[5 to 32 chars]"
+"password": "[5 to 100 chars]"
 }
 ```
 

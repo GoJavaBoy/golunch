@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: co.uk.golunch.service.UserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.92 s - in co.uk.golunch.service.UserServiceTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.044 s - in co.uk.golunch.service.UserServiceTest
