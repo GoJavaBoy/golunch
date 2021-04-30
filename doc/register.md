@@ -3,7 +3,7 @@ ____
 
 Used to create new user.
 
-**URL :** `/register/`
+**URL :** `/profile/register/`
 
 **Method :** `POST`
 

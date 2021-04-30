@@ -112,46 +112,34 @@ GoLunch returns the following status codes in its API:
 > For windows use `Git Bash`
 
 #### get All Users
-`curl -s http://localhost:8080/topjava/rest/admin/users --user admin@gmail.com:admin`
-
-#### get Users 100001
-`curl -s http://localhost:8080/topjava/rest/admin/users/100001 --user admin@gmail.com:admin`
+`curl -s http://localhost:8080/golunch/admin/users --user admin@gmail.com:admin`
 
 #### register Users
-`curl -s -i -X POST -d '{"name":"New User","email":"test@mail.ru","password":"test-password"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/topjava/rest/profile/register`
+`curl -s -i -X POST -d '{"name":"New User","email":"test@mail.ru","password":"test-password"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/golunch/profile/register`
 
 #### get Profile
-`curl -s http://localhost:8080/topjava/rest/profile --user test@mail.ru:test-password`
+`curl -s http://localhost:8080/golunch/profile --user user@yandex.ru:password`
 
-#### get All Meals
-`curl -s http://localhost:8080/topjava/rest/profile/meals --user user@yandex.ru:password`
+#### get All Restaurants
+`curl -s http://localhost:8080/golunch/profile/restaurants --user user@yandex.ru:password`
 
-#### get Meals 100003
-`curl -s http://localhost:8080/topjava/rest/profile/meals/100003  --user user@yandex.ru:password`
+#### get Restaurant 100001
+`curl -s http://localhost:8080/golunch/profile/restaurants/100001  --user user@yandex.ru:password`
 
-#### filter Meals
-`curl -s "http://localhost:8080/topjava/rest/profile/meals/filter?startDate=2020-01-30&startTime=07:00:00&endDate=2020-01-31&endTime=11:00:00" --user user@yandex.ru:password`
+#### vote for Restaurant 100001
+`curl -s -X PATCH "http://localhost:8080/golunch/profile/restaurants/100001/vote" --user user3@yandex.ru:password`
 
-#### get Meals not found
-`curl -s -v http://localhost:8080/topjava/rest/profile/meals/100008 --user user@yandex.ru:password`
+#### get Restaurant not found
+`curl -s -v http://localhost:8080/golunch/profile/restaurants/10 --user user@yandex.ru:password`
 
-#### delete Meals
-`curl -s -X DELETE http://localhost:8080/topjava/rest/profile/meals/100002 --user user@yandex.ru:password`
+#### get Restaurants History
+`curl -s http://localhost:8080/golunch/admin/restaurants/history --user admin@gmail.com:admin`
 
-#### create Meals
-`curl -s -X POST -d '{"dateTime":"2020-02-01T12:00","description":"Created lunch","calories":300}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/topjava/rest/profile/meals --user user@yandex.ru:password`
+#### delete Restaurant
+`curl -s -X DELETE http://localhost:8080/golunch/admin/restaurants/100001 --user admin@gmail.com:admin`
 
-#### update Meals
-`curl -s -X PUT -d '{"dateTime":"2020-01-30T07:00", "description":"Updated breakfast", "calories":200}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/profile/meals/100003 --user user@yandex.ru:password`
-
-#### validate with Error
-`curl -s -X POST -d '{}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/admin/users --user admin@gmail.com:admin`
-`curl -s -X PUT -d '{"dateTime":"2015-05-30T07:00"}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/profile/meals/100003 --user user@yandex.ru:password`
-
-
-
-
-
+#### create Restaurant
+`curl -s -X POST -d '{"name":"New Restaurant","menu":[{"name":"New dish #2","price":0.90},{"name":"New dish #1","price":5.35},{"name":"New dish #3","price":1.99}]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/golunch/admin/restaurants --user admin@gmail.com:admin`
 
 
 

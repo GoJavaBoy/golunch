@@ -1,10 +1,10 @@
-# Update User
+# Update Restaurant
 ____
 
 Allow the Authenticated User with right permission
-update User details.
+update Restaurant `name` or `menu`.
 
-**URL :** `/admin/users/:pk`
+**URL :** `/admin/restaurants/:pk`
 
 **Method :** `PUT`
 
@@ -16,26 +16,41 @@ update User details.
 
 ```
 {
-"name": "[1 to 30 chars]"
-"email": "[email format from 1 to 30 chars]",
-"password": "[5 to 100 chars]"
-"roles": [
-    [Role.class...]
+"name": "[2 to 30 chars]"
+"menu": [
+    {
+      "name": "[2 to 30 chars]",
+      "price": [not null]
+    },
+    {
+      "name": "[2 to 30 chars]",
+      "price": [not null]
+    }
+    ...
   ]
 }
 ```
 
-**Data example**
-
+**Data example** All fields must be sent. 
 Partial data is not allowed.
+
 
 ```
 {
-  "name": "Updated User",
-  "email": "updateduser@gmail.com",
-  "password": "updatedpass",
-  "roles": [
-    "USER"
+  "name": "Updated Restaurant",
+  "menu": [
+    {
+      "name": "Updated dish #3",
+      "price": 0.99
+    },
+    {
+      "name": "Updated dish #2",
+      "price": 1.9
+    },
+    {
+      "name": "Updated dish #1",
+      "price": 4.35
+    }
   ]
 }
 ```
@@ -51,7 +66,7 @@ admin rights.
 ### Error Response
 ____
 
-**Condition :** Account does not exist at URL
+**Condition :** Restaurant does not exist at URL
 
 **Code :** `422 UNPROCESSABLE ENTITY`
 
@@ -59,14 +74,14 @@ ____
 
 ```
 {
-"url": "/admin/users/:pk",
+"url": "/admin/restaurants/:pk",
 "message": "... must be with id=:pk "
 }
 ```
 
 ### OR
 
-**Condition :** If Account exists but
+**Condition :** If Restaurant exists but
 Authorized User does not have required permissions.
 
 **Code :** `403 FORBIDDEN`
@@ -79,7 +94,7 @@ Forbidden
 ### OR
 
 **Condition :** If provided data is invalid,
-e.g. a name field is too long.
+e.g. a name field is too long or menu item price is null.
 
 **Code :** `422 UNPROCESSABLE ENTITY`
 
@@ -87,6 +102,6 @@ e.g. a name field is too long.
 
 ```
 {
-"url": "/admin/users/:pk",
+"url": "/admin/restaurants/:pk",
 "message": "Validation failed for..."
 }

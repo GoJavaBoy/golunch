@@ -38,7 +38,7 @@ ____
 
 **Condition :** Data provided is valid and User is Authenticated.
 
-**Code :** `200 OK`
+**Code :** `204 NO CONTENT`
 
 ### Error Response
 ____

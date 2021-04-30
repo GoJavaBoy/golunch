@@ -1,7 +1,7 @@
 # Create New User
 ____
 
-Used to create a new user.
+Used to create a new User.
 
 **URL :** `/admin/users/`
 
@@ -45,7 +45,7 @@ and an Account didn't exist for this User.
 
 **Code :** `201 CREATED`
 
-**Content example :** Response will reflect back the created user information.
+**Content example :** Response will reflect back the created User information.
 
 ```
 {

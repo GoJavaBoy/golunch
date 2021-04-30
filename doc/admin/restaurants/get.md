@@ -4,9 +4,9 @@ ____
 Show a single Restaurant if it's available
 for the current User.
 
-**URL :** `/profile/restaurants/:pk/`
+**URL :** `/admin/restaurants/:pk/`
 
-**URL Parameters :** 
+**URL Parameters :**
 `pk=[integer]` where `pk` is the ID of the Restaurant on the server.
 
 **Method :** `GET`
@@ -69,6 +69,6 @@ exist with `id` of provided `pk` parameter.
 
 ```
 {
-"url": "/profile/restaurants/:pk",
+"url": "/admin/restaurants/:pk",
 "message": "Not found entity with id=:pk"
 }

@@ -3,7 +3,7 @@ ____
 
 Allow the Authenticated User vote for a restaurant.
 
-**URL :** `/profile/restaurants/:pk/`
+**URL :** `/admin/restaurants/:pk/`
 
 **URL Parameters :**
 `pk=[integer]` where `pk` is the ID of the Restaurant on the server.
