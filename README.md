@@ -40,16 +40,16 @@ to the User whose credentials is provided with the request:
 
 _Regular user endpoints:_
 
-- Show Account : GET /profile/
-- Show Account With Related Restaurant : GET /profile/with-restaurant/
-- Update Account : PUT /profile/
-- Delete An Account : DELETE /profile/
+- [Show Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/get.md) : GET /profile/
+- [Show Account With Related Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/getWithRestaurant.md) : GET /profile/with-restaurant/
+- [Update Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/put.md) : PUT /profile/
+- [Delete An Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/delete.md) : DELETE /profile/
 
 _Restaurant endpoints:_
 
-- Show Accessible Restaurants : GET /profile/restaurants/
-- Show An Restaurant : GET /profile/restaurants/:pk/
-- Vote For Restaurant : PATCH /profile/restaurants/:pk/vote/
+- [Show Accessible Restaurants](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/restaurants/getAll.md) : GET /profile/restaurants/
+- [Show An Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/restaurants/get.md) : GET /profile/restaurants/:pk/
+- [Vote For Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/restaurants/vote.md) : PATCH /profile/restaurants/:pk/vote/
 
 #### Account related
 
@@ -58,23 +58,23 @@ that the Authenticated User has admin permissions.
 
 _Admin endpoints:_
 
-- Show Accessible Accounts : GET /admin/users/
-- Create Account : POST /admin/users/
-- Show An Account By ID : GET /admin/users/:pk/
-- Show An Account By Email : GET /admin/users?email=:email
-- Show An Account With Related Restaurant : GET /admin/users/:pk/with-restaurant/
-- Update An Account : PUT /admin/users/:pk/
-- Delete An Account : DELETE /admin/users/:pk/
+- [Show Accessible Accounts](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/getAll.md) : GET /admin/users/
+- [Create Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/post.md) : POST /admin/users/
+- [Show An Account By ID](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/get.md) : GET /admin/users/:pk/
+- [Show An Account By Email] : GET /admin/users?email=:email
+- [Show An Account With Related Restaurant] : GET /admin/users/:pk/with-restaurant/
+- [Update An Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/put.md) : PUT /admin/users/:pk/
+- [Delete An Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/delete.md) : DELETE /admin/users/:pk/
 
 _Restaurant endpoints:_
 
-- Show Accessible Restaurants : GET /admin/restaurants/
-- Show An Restaurant : GET /admin/restaurants/:pk/
-- Vote For Restaurant : PATCH /admin/restaurants/:pk/vote/
-- Update Restaurant : PUT /admin/restaurants/:pk/
-- Create Restaurant : POST /admin/restaurants/
-- Delete Restaurant : DELETE /admin/restaurants/:pk/
-- Show Restaurant History : GET /admin/restaurants/history/
+- [Show Accessible Restaurants](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/getAll.md) : GET /admin/restaurants/
+- [Show An Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/get.md) : GET /admin/restaurants/:pk/
+- [Vote For Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/vote.md) : PATCH /admin/restaurants/:pk/vote/
+- [Update Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/put.md) : PUT /admin/restaurants/:pk/
+- [Create Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/post.md) : POST /admin/restaurants/
+- [Delete Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/delete.md) : DELETE /admin/restaurants/:pk/
+- [Show Restaurant History](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/restaurants/getHistory.md) : GET /admin/restaurants/history/
 
 ### Responses
 Many API endpoints return the JSON representation of
