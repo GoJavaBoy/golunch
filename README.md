@@ -51,7 +51,7 @@ _Restaurant endpoints:_
 - [Show An Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/restaurants/get.md) : GET /profile/restaurants/:pk/
 - [Vote For Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/user/restaurants/vote.md) : PATCH /profile/restaurants/:pk/vote/
 
-#### Account related
+#### Admin related
 
 Endpoints for viewing and manipulating the Accounts
 that the Authenticated User has admin permissions.
