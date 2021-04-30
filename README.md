@@ -25,7 +25,7 @@ ____
 
 Open endpoints require no Authentication.
 
-- [Registration]() : POST /register
+- [Registration](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/register.md) : POST /register
 
 ### Endpoints that require Authentication
 
