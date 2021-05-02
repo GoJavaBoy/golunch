@@ -61,7 +61,7 @@ _Admin endpoints:_
 - [Show Accessible Accounts](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/getAll.md) : GET /admin/users/
 - [Create Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/post.md) : POST /admin/users/
 - [Show An Account By ID](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/get.md) : GET /admin/users/:pk/
-- [Show An Account By Email](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/getByEmail.md) : GET /admin/users?email=:email
+- [Show An Account By Email](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/getByEmail.md) : GET /admin/users?email=:em
 - [Show An Account With Related Restaurant](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/getWithRestaurant.md) : GET /admin/users/:pk/with-restaurant/
 - [Update An Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/put.md) : PUT /admin/users/:pk/
 - [Delete An Account](https://github.com/GoJavaBoy/golunch/blob/golunch_v_1_1/doc/admin/pk/delete.md) : DELETE /admin/users/:pk/
