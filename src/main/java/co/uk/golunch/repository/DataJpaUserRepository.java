@@ -35,8 +35,4 @@ public class DataJpaUserRepository {
     public List<User> getAll() {
         return crudJpaUserRepository.findAll();
     }
-
-    public User getWithRestaurant(int id){
-       return crudJpaUserRepository.getWithRestaurant(id);
-    }
 }

@@ -17,10 +17,4 @@ public interface CrudJpaUserRepository extends JpaRepository<User, Integer> {
     int delete(@Param("id") int id);
 
     User getByEmail(String email);
-
-    //    https://stackoverflow.com/a/46013654/548473
-    //For test purpose only
-    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT u FROM User u WHERE u.id=?1")
-    User getWithRestaurant(int id);
 }

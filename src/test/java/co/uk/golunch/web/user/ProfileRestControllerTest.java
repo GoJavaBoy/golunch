@@ -72,15 +72,6 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void getWithRestaurant() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "/with-restaurant")
-                .with(userHttpBasic(user)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(USER_WITH_RESTAURANT_MATCHER.contentJson(user));
-    }
-    @Test
     void register() throws Exception {
         UserTo newTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword");
         User newUser = UserUtil.createNewFromTo(newTo);

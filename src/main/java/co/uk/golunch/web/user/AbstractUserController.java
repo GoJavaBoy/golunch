@@ -62,9 +62,4 @@ public class AbstractUserController {
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
     }
-
-    public User getWithRestaurant(int id) {
-        log.info("getWithRestaurant {}", id);
-        return service.getWithRestaurant(id);
-    }
 }

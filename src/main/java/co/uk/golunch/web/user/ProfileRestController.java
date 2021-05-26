@@ -37,11 +37,6 @@ public class ProfileRestController extends AbstractUserController {
         super.update(userTo, authUserId());
     }
 
-    @GetMapping("/with-restaurant")
-    public User getWithRestaurant() {
-        return super.getWithRestaurant(authUserId());
-    }
-
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {

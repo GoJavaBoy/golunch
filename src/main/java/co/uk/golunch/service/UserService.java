@@ -49,10 +49,6 @@ public class UserService implements UserDetailsService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
-    public User getWithRestaurant(int id){
-        return checkNotFoundWithId(repository.getWithRestaurant(id), id);
-    }
-
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
