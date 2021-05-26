@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping(value = AdminRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestaurantRestController extends AbstractRestaurantController {
 
-    static final String REST_URL = "/admin/restaurants";
+    static final String REST_URL = "/restaurants";
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
