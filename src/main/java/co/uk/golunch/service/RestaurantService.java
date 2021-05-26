@@ -1,9 +1,7 @@
 package co.uk.golunch.service;
 
-import co.uk.golunch.model.HistoryRestaurant;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.User;
-import co.uk.golunch.repository.DataJpaHistoryRepository;
 import co.uk.golunch.repository.DataJpaRestaurantRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

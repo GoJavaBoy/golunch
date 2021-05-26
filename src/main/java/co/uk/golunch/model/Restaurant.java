@@ -3,13 +3,14 @@ package co.uk.golunch.model;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
-public class Restaurant extends AbstractBaseEntity {
+public class Restaurant extends AbstractNamedEntity {
 
    @ElementCollection(fetch = FetchType.EAGER)
    @CollectionTable(name="restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
@@ -22,8 +23,11 @@ public class Restaurant extends AbstractBaseEntity {
     private Set<Dish> menu;
 
     //Counting votes without initialize votesWithUser
-    @Formula("(select count(*) from users where users.restaurant_id = id)")
-    private int votes;
+//    @Formula("(select count(*) from users where users.restaurant_id = id)")
+//    private int votes;
+
+    @OneToMany
+    private List<Vote> votes;
 
     public Restaurant(Restaurant restaurant){
         this(restaurant.getId(), restaurant.getName());
@@ -38,14 +42,6 @@ public class Restaurant extends AbstractBaseEntity {
     }
 
     public Restaurant() {
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
     }
 
     public Set<Dish> getMenu() {

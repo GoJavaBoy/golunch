@@ -19,17 +19,11 @@ public abstract class AbstractBaseEntity implements HasId {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
 
-    @Column(name = "name", nullable = false)
-    @NotBlank
-    @Size(min = 2, max = 30)
-    protected String name;
-
     protected AbstractBaseEntity() {
     }
 
-    protected AbstractBaseEntity(Integer id, String name) {
+    protected AbstractBaseEntity(Integer id) {
         this.id = id;
-        this.name = name;
     }
 
     public void setId(Integer id) {
@@ -46,13 +40,6 @@ public abstract class AbstractBaseEntity implements HasId {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public boolean isNew() {
@@ -78,6 +65,6 @@ public abstract class AbstractBaseEntity implements HasId {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " id: " + id + " name: " + name;
+        return getClass().getSimpleName() + " id: " + id;
     }
 }

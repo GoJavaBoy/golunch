@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public class DataJpaUserRepository {
 
-    private final CrudJpaUserRepository crudJpaUserRepository;
+    private final UserRepository crudJpaUserRepository;
 
-    public DataJpaUserRepository(CrudJpaUserRepository crudJpaUserRepository) {
+    public DataJpaUserRepository(UserRepository crudJpaUserRepository) {
         this.crudJpaUserRepository = crudJpaUserRepository;
     }
 

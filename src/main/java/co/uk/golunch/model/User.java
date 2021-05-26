@@ -21,7 +21,7 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractBaseEntity {
+public class User extends AbstractNamedEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -38,13 +38,13 @@ public class User extends AbstractBaseEntity {
     @NotNull
     private Date registered = new Date();
 
-    @Column(name = "voted")
-    private Date voted;
+//    @Column(name = "voted")
+//    private Date voted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id")
-    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-    private Restaurant restaurant;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "restaurant_id")
+//    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+//    private Restaurant restaurant;
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
@@ -105,22 +105,6 @@ public class User extends AbstractBaseEntity {
         return roles;
     }
 
-    public Date getVoted() {
-        return voted;
-    }
-
-    public void setVoted(Date voted) {
-        this.voted = voted;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
@@ -131,7 +115,6 @@ public class User extends AbstractBaseEntity {
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", registered=" + registered +
-                ", voted=" + voted +
                 ", roles=" + roles +
                 '}';
     }

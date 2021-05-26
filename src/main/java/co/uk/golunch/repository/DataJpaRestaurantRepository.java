@@ -9,30 +9,30 @@ import java.util.List;
 @Repository
 public class DataJpaRestaurantRepository {
 
-    private final CrudRestaurantRepository crudRestaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    public DataJpaRestaurantRepository(CrudRestaurantRepository crudRestaurantRepository) {
-        this.crudRestaurantRepository = crudRestaurantRepository;
+    public DataJpaRestaurantRepository(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
     }
 
     @Transactional
     public Restaurant create(Restaurant restaurant) {
-        return crudRestaurantRepository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
     public Restaurant get(int id) {
-        return crudRestaurantRepository.findById(id);
+        return restaurantRepository.findById(id);
     }
 
     public boolean delete(int id) {
-        return crudRestaurantRepository.delete(id) != 0;
+        return restaurantRepository.delete(id) != 0;
     }
 
     public List<Restaurant> getAll() {
-        return crudRestaurantRepository.findAll();
+        return restaurantRepository.findAll();
     }
 
     public void cleanVotes(int resId) {
-        crudRestaurantRepository.cleanVotes(resId);
+        restaurantRepository.cleanVotes(resId);
     }
 }
