@@ -85,17 +85,4 @@ public class UserServiceTest extends AbstractServiceTest {
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "  ", "password", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
     }
-
-    @Test
-    void getWithRestaurant() {
-        User admin = service.getWithRestaurant(ADMIN_ID);
-        USER_WITH_RESTAURANT_MATCHER.assertMatch(admin, UserTestData.admin);
-    }
-
-    @Test
-    void getWithRestaurantNotFound() {
-        Assertions.assertThrows(NotFoundException.class,
-                () -> service.getWithRestaurant(1));
-    }
-
 }
