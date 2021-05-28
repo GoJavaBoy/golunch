@@ -1,9 +1,6 @@
 package co.uk.golunch.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -11,16 +8,18 @@ import java.time.LocalDate;
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "voted_date"}, name = "unique_user_id_voted_date_idx")})
 public class Vote extends AbstractBaseEntity {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     @NotNull
-    @Column(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
-    @Column(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @NotNull
     @Column(name = "voted_date", nullable = false)
+    @NotNull
     private LocalDate date;
 
     public Vote() {

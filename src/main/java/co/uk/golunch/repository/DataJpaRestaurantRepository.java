@@ -32,7 +32,7 @@ public class DataJpaRestaurantRepository {
         return restaurantRepository.findAll();
     }
 
-    public void cleanVotes(int resId) {
-        restaurantRepository.cleanVotes(resId);
-    }
+//    public void cleanVotes(int resId) {
+//        restaurantRepository.cleanVotes(resId);
+//    }
 }

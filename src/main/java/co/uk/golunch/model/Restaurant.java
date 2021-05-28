@@ -12,22 +12,22 @@ import org.hibernate.annotations.Cache;
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
 
-   @ElementCollection(fetch = FetchType.EAGER)
-   @CollectionTable(name="restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
-   @AttributeOverrides({
-           @AttributeOverride(name="name",
-                   column=@Column(name="name")),
-           @AttributeOverride(name="price",
-                   column=@Column(name="price"))
-   })
-    private Set<Dish> menu;
+//   @ElementCollection(fetch = FetchType.EAGER)
+//   @CollectionTable(name="restaurant_menu", joinColumns = @JoinColumn(name = "restaurant_id"))
+//   @AttributeOverrides({
+//           @AttributeOverride(name="name",
+//                   column=@Column(name="name")),
+//           @AttributeOverride(name="price",
+//                   column=@Column(name="price"))
+//   })
+//    private Set<Dish> menu;
 
     //Counting votes without initialize votesWithUser
 //    @Formula("(select count(*) from users where users.restaurant_id = id)")
 //    private int votes;
 
-    @OneToMany
-    private List<Vote> votes;
+//    @OneToMany
+//    private List<Vote> vote   s;
 
     public Restaurant(Restaurant restaurant){
         this(restaurant.getId(), restaurant.getName());
@@ -44,11 +44,5 @@ public class Restaurant extends AbstractNamedEntity {
     public Restaurant() {
     }
 
-    public Set<Dish> getMenu() {
-        return menu;
-    }
 
-    public void setMenu(Set<Dish> menu) {
-        this.menu = menu;
-    }
 }

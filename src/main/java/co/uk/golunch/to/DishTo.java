@@ -1,5 +1,7 @@
 package co.uk.golunch.to;
 
+import co.uk.golunch.model.Dish;
+
 import java.math.BigDecimal;
 
 public class DishTo {
@@ -9,9 +11,9 @@ public class DishTo {
     public DishTo() {
     }
 
-    public DishTo(BigDecimal price, String name) {
-        this.price = price;
-        this.name = name;
+    public DishTo(Dish dish) {
+        this.price = dish.getPrice();
+        this.name = dish.getName();
     }
 
     public BigDecimal getPrice() {

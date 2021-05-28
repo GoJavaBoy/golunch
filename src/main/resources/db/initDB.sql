@@ -16,10 +16,11 @@ CREATE TABLE restaurants
 
 CREATE TABLE menu
 (
+    id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     restaurant_id INTEGER   NOT NULL,
     name          VARCHAR   NOT NULL,
     price         DECIMAL   NOT NULL,
-    dish_add_date TIMESTAMP NOT NULL,
+    dish_add_date DATE NOT NULL,
     CONSTRAINT dish_name_idx UNIQUE (restaurant_id, name),
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
 );
@@ -30,7 +31,7 @@ CREATE TABLE users
     name       VARCHAR                           NOT NULL,
     email      VARCHAR                           NOT NULL,
     password   VARCHAR                           NOT NULL,
-    registered TIMESTAMP           DEFAULT now() NOT NULL
+    registered DATE           DEFAULT now() NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON USERS (email);
 
@@ -44,9 +45,10 @@ CREATE TABLE user_roles
 
 CREATE TABLE votes
 (
+    id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     user_id       INTEGER NOT NULL,
     restaurant_id INTEGER NOT NULL,
-    voted_date    TIMESTAMP,
+    voted_date    DATE,
     CONSTRAINT unique_user_id_voted_date_idx UNIQUE (user_id, voted_date),
     FOREIGN KEY (user_id) REFERENCES USERS (id) ON DELETE CASCADE,
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE

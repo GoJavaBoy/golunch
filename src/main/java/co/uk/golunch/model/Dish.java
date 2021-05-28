@@ -25,18 +25,23 @@ public class Dish extends AbstractNamedEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "restaurant_id", nullable = false)
+    @NotNull
     private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(Integer id, String name, BigDecimal price, LocalDate date) {
+    public Dish(Integer id, String name, BigDecimal price, LocalDate date, Restaurant restaurant) {
         super(id, name);
         this.price = price;
         this.date = date;
+        this.restaurant = restaurant;
+    }
+
+    public Dish(Dish dish) {
+        this(dish.getId(), dish.getName(), dish.getPrice(), dish.getDate(), dish.getRestaurant());
     }
 
     public String getName() {
@@ -53,6 +58,22 @@ public class Dish extends AbstractNamedEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

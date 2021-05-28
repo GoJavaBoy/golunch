@@ -2,10 +2,12 @@ package co.uk.golunch.web.restaurant;
 
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.service.RestaurantService;
+import co.uk.golunch.to.RestaurantTo;
 import co.uk.golunch.web.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 import static co.uk.golunch.util.ValidationUtil.assureIdConsistent;
@@ -41,20 +43,20 @@ public class AbstractRestaurantController {
         return restaurantService.getAll();
     }
 
-    public List<HistoryRestaurant> getHistory() {
-        log.info("getHistory");
-        return restaurantService.getHistory();
-    }
-
 
     public void delete(int id) {
         log.info("delete {}", id);
         restaurantService.delete(id);
     }
 
-    public void vote(int id) {
-        int userId = SecurityUtil.authUserId();
-        log.info("user {} vote for restaurant {}", userId, id);
-        restaurantService.vote(userId, id);
+//    public void vote(int id) {
+//        int userId = SecurityUtil.authUserId();
+//        log.info("user {} vote for restaurant {}", userId, id);
+//        restaurantService.vote(userId, id);
+//    }
+
+    public RestaurantTo getWithMenuAndVotes(int id) {
+        log.info("get restaurant with menu and votes {}", id);
+        return restaurantService.getWithMenuAndVotes(id);
     }
 }

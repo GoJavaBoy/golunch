@@ -1,6 +1,7 @@
 package co.uk.golunch.web.restaurant;
 
 import co.uk.golunch.model.Restaurant;
+import co.uk.golunch.to.RestaurantTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +34,11 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @GetMapping("/{id}")
-    @Override
-    public Restaurant get(@PathVariable int id) {
-        return super.get(id);
-    }
+//    @GetMapping("/{id}")
+//    @Override
+//    public Restaurant get(@PathVariable int id) {
+//        return super.get(id);
+//    }
 
     @GetMapping
     @Override
@@ -52,11 +53,17 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         super.delete(id);
     }
 
-    @PatchMapping("/{id}/vote")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping("/{id}")
     @Override
-    public void vote(@PathVariable int id) {
-        super.vote(id);
+    public RestaurantTo getWithMenuAndVotes(@PathVariable int id) {
+        return super.getWithMenuAndVotes(id);
     }
+
+    //    @PatchMapping("/{id}/vote")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @Override
+//    public void vote(@PathVariable int id) {
+//        super.vote(id);
+//    }
 
 }

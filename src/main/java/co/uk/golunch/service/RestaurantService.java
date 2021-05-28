@@ -1,18 +1,23 @@
 package co.uk.golunch.service;
 
+import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.model.User;
+import co.uk.golunch.model.Vote;
 import co.uk.golunch.repository.DataJpaRestaurantRepository;
+import co.uk.golunch.repository.MenuRepository;
+import co.uk.golunch.repository.VotesRepository;
+import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.RestaurantTo;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static co.uk.golunch.util.ValidationUtil.*;
 
@@ -20,13 +25,13 @@ import static co.uk.golunch.util.ValidationUtil.*;
 public class RestaurantService {
 
     private final DataJpaRestaurantRepository restaurantRepository;
-    private final UserService userService;
-    private final DataJpaHistoryRepository historyRepository;
+    private final MenuRepository menuRepository;
+    private final VotesRepository votesRepository;
 
-    public RestaurantService(DataJpaRestaurantRepository restaurantRepository, UserService userService, DataJpaHistoryRepository historyRepository) {
+    public RestaurantService(DataJpaRestaurantRepository restaurantRepository, MenuRepository menuRepository, VotesRepository votesRepository) {
         this.restaurantRepository = restaurantRepository;
-        this.userService = userService;
-        this.historyRepository = historyRepository;
+        this.menuRepository = menuRepository;
+        this.votesRepository = votesRepository;
     }
 
     public Restaurant get(int id) {
@@ -36,8 +41,6 @@ public class RestaurantService {
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public boolean delete(int id) {
-        Restaurant oldRestaurant = get(id);
-        saveInHistory(oldRestaurant);
         return restaurantRepository.delete(id);
     }
 
@@ -46,50 +49,27 @@ public class RestaurantService {
         return restaurantRepository.getAll();
     }
 
-    public List<HistoryRestaurant> getHistory() {
-        return historyRepository.getAll();
+    public RestaurantTo getWithMenuAndVotes(int id){
+        //LocalDate.now()
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        List<DishTo> menu = menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now()).stream()
+                .map(DishTo::new)
+                .collect(Collectors.toList());
+        List<Vote> votes = votesRepository.findAllByRestaurantAndAndDate(restaurant.getId(), LocalDate.now());
+        return new RestaurantTo(restaurant.getName(), menu, votes.size());
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        Restaurant oldRestaurant = get(restaurant.id());
-        saveInHistory(oldRestaurant);
-        restaurantRepository.cleanVotes(restaurant.id());
         restaurantRepository.create(restaurant);
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
     public Restaurant create(Restaurant restaurant) {
-        Assert.notNull(restaurant, "meal must not be null");
+        Assert.notNull(restaurant, "restaurant must not be null");
         return restaurantRepository.create(restaurant);
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
-    @Transactional
-    public void vote(int userId, int resId) {
-        User user = userService.get(userId);
-        Date lastVote = user.getVoted();
-        if (lastVote != null && !canVote(lastVote)) {
-            return;
-        }
-        Restaurant restaurant = get(resId);
-        user.setRestaurant(restaurant);
-        user.setVoted(new Date());
-    }
-
-    protected boolean canVote(Date lastVote) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        LocalDateTime voteDate = lastVote.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-        return !(currentDate.toLocalDate().equals(voteDate.toLocalDate()) && currentDate.getHour() > 11);
-    }
-
-    private void saveInHistory(Restaurant restaurant){
-        HistoryRestaurant historyRestaurant = new HistoryRestaurant(restaurant.getId(), restaurant.getName(),
-                restaurant.getVotes(), restaurant.getMenu(), new Date());
-        historyRepository.saveInHistory(historyRestaurant);
-    }
 }
