@@ -1,5 +1,6 @@
 package co.uk.golunch.model;
 
+import co.uk.golunch.to.DishTo;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -37,6 +38,13 @@ public class Dish extends AbstractNamedEntity {
         super(id, name);
         this.price = price;
         this.date = date;
+        this.restaurant = restaurant;
+    }
+
+    public Dish(DishTo dishTo, Restaurant restaurant) {
+        super(dishTo.getId(), dishTo.getName());
+        this.price = dishTo.getPrice();
+        this.date = LocalDate.now();
         this.restaurant = restaurant;
     }
 

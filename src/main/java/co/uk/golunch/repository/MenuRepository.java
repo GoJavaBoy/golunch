@@ -14,8 +14,6 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public interface MenuRepository extends JpaRepository<Dish, Integer> {
-//    List<Dish> findAllByRestaurantIdAndDate(@Param("restaurantId") Integer restaurantId, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date);
-
     List<Dish> findAllByRestaurantAndDate(Restaurant restaurant, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date);
-    List<Dish> findAllByRestaurant(Restaurant restaurant);
+    Dish findByIdAndRestaurantId(int dishId, int resId);
 }

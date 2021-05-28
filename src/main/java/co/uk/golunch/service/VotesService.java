@@ -7,7 +7,9 @@ import co.uk.golunch.repository.DataJpaRestaurantRepository;
 import co.uk.golunch.repository.MenuRepository;
 import co.uk.golunch.repository.VotesRepository;
 import co.uk.golunch.util.exception.NotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,16 +29,17 @@ public class VotesService {
         this.menuRepository = menuRepository;
     }
 
+    @Transactional
     public void save(User user, int resId){
         Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(resId), resId);
         if (menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now()).isEmpty()){
             throw new NotFoundException("There no menu for this restaurant");
         }
-        Optional<Vote> currentVote = votesRepository.getForUserAndDate(user.getId(), LocalDate.now());
-        if (currentVote.isEmpty()){
+        Optional<Vote> todayVote = votesRepository.getForUserAndDate(user.getId(), LocalDate.now());
+        if (todayVote.isEmpty()){
             votesRepository.save(new Vote(user, restaurant, LocalDate.now()));
-        } else if (LocalTime.now().isBefore(LocalTime.parse("11:00"))){
-            currentVote.get().setRestaurant(restaurant);
+        } else if (LocalTime.now().isBefore(LocalTime.parse("16:00"))){
+            todayVote.get().setRestaurant(restaurant);
         }
     }
 

@@ -1,6 +1,8 @@
 package co.uk.golunch.web.restaurant;
 
+import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
+import co.uk.golunch.to.DishTo;
 import co.uk.golunch.to.RestaurantTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = AdminRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestaurantRestController extends AbstractRestaurantController {
 
-    static final String REST_URL = "/restaurants";
+    static final String REST_URL = "/admin/restaurants";
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -33,12 +35,6 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-
-//    @GetMapping("/{id}")
-//    @Override
-//    public Restaurant get(@PathVariable int id) {
-//        return super.get(id);
-//    }
 
     @GetMapping
     @Override
@@ -59,11 +55,31 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         return super.getWithMenuAndVotes(id);
     }
 
-    //    @PatchMapping("/{id}/vote")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @Override
-//    public void vote(@PathVariable int id) {
-//        super.vote(id);
-//    }
+    @PostMapping("/{id}/menu")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Override
+    public void addMenu(@PathVariable int id, @RequestBody @Valid DishTo... menu) {
+        super.addMenu(id, menu);
+    }
 
+    @GetMapping("/{id}/menu")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Override
+    public List<Dish> getTodayMenu(@PathVariable int id) {
+       return super.getTodayMenu(id);
+    }
+
+    @PutMapping("/{id}/menu")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Override
+    public void updateDish(@PathVariable int id, @RequestBody @Valid DishTo dishTo){
+        super.updateDish(id, dishTo);
+    }
+
+    @DeleteMapping("/{id}/menu/{dishId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Override
+    public void deleteDish(@PathVariable int id, @PathVariable int dishId){
+        super.deleteDish(id, dishId);
+    }
 }

@@ -8,14 +8,17 @@ import co.uk.golunch.repository.MenuRepository;
 import co.uk.golunch.repository.VotesRepository;
 import co.uk.golunch.to.DishTo;
 import co.uk.golunch.to.RestaurantTo;
+import co.uk.golunch.util.exception.NotFoundException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,10 +37,6 @@ public class RestaurantService {
         this.votesRepository = votesRepository;
     }
 
-    public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.get(id), id);
-    }
-
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public boolean delete(int id) {
@@ -49,8 +48,7 @@ public class RestaurantService {
         return restaurantRepository.getAll();
     }
 
-    public RestaurantTo getWithMenuAndVotes(int id){
-        //LocalDate.now()
+    public RestaurantTo getWithMenuAndVotes(int id) {
         Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
         List<DishTo> menu = menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now()).stream()
                 .map(DishTo::new)
@@ -72,4 +70,47 @@ public class RestaurantService {
         return restaurantRepository.create(restaurant);
     }
 
+    @Transactional
+    public void addMenu(int id, DishTo... dishes) {
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        Assert.notNull(dishes, "menu must not be null");
+        if (dishes.length == 0) {
+            throw new IllegalArgumentException("menu must not be empty");
+        }
+        List<Dish> menu = Arrays.stream(dishes)
+                .map(dishTo -> new Dish(dishTo, restaurant))
+                .collect(Collectors.toList());
+        menuRepository.saveAll(menu);
+    }
+
+    public List<Dish> getTodayMenu(int id) {
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        return menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now());
+    }
+
+    @Transactional
+    public void updateDish(int resId, DishTo dishTo) {
+        Assert.notNull(dishTo, "dish must not be null");
+        Dish dish = getDish(resId, dishTo.getId());
+        if (!dishTo.isNew() && dish == null) {
+            throw new DataIntegrityViolationException("dish must not be new or null");
+        }
+        dish.setDate(LocalDate.now());
+        dish.setName(dishTo.getName());
+        dish.setPrice(dishTo.getPrice());
+//        menuRepository.save(dish);
+    }
+
+    @Transactional
+    public void deleteDish(int resId, int dishId) {
+        Dish dish = getDish(resId, dishId);
+        if (dish == null) {
+            throw new NotFoundException("wrong restaurant or dish id");
+        }
+        menuRepository.deleteById(dishId);
+    }
+
+    private Dish getDish(int resId, int dishId) {
+        return menuRepository.findByIdAndRestaurantId(dishId, resId);
+    }
 }
