@@ -1,12 +1,9 @@
 package co.uk.golunch.to;
 
 import co.uk.golunch.HasId;
-import org.hibernate.validator.constraints.Range;
-import org.springframework.util.Assert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;

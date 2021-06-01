@@ -1,13 +1,11 @@
 package co.uk.golunch.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 import org.springframework.util.CollectionUtils;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -37,14 +35,6 @@ public class User extends AbstractNamedEntity {
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     private Date registered = new Date();
-
-//    @Column(name = "voted")
-//    private Date voted;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "restaurant_id")
-//    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-//    private Restaurant restaurant;
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)

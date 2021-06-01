@@ -17,12 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static co.uk.golunch.util.ValidationUtil.*;
+import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class RestaurantService {
@@ -39,8 +38,8 @@ public class RestaurantService {
 
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
-    public boolean delete(int id) {
-        return restaurantRepository.delete(id);
+    public void delete(int id) {
+        checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @Cacheable("restaurants")
@@ -98,7 +97,6 @@ public class RestaurantService {
         dish.setDate(LocalDate.now());
         dish.setName(dishTo.getName());
         dish.setPrice(dishTo.getPrice());
-//        menuRepository.save(dish);
     }
 
     @Transactional
@@ -110,7 +108,10 @@ public class RestaurantService {
         menuRepository.deleteById(dishId);
     }
 
-    private Dish getDish(int resId, int dishId) {
+    private Dish getDish(int resId, Integer dishId) {
+        if (dishId == null){
+            throw new DataIntegrityViolationException("provide id when updating dish");
+        }
         return menuRepository.findByIdAndRestaurantId(dishId, resId);
     }
 }

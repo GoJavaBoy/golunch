@@ -5,10 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -50,6 +47,11 @@ public class Dish extends AbstractNamedEntity {
 
     public Dish(Dish dish) {
         this(dish.getId(), dish.getName(), dish.getPrice(), dish.getDate(), dish.getRestaurant());
+    }
+
+    public Dish(DishTo dishTo) {
+        super(dishTo.getId(), dishTo.getName());
+        this.price = dishTo.getPrice();
     }
 
     public String getName() {

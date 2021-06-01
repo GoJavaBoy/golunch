@@ -63,7 +63,6 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
     }
 
     @GetMapping("/{id}/menu")
-    @ResponseStatus(HttpStatus.CREATED)
     @Override
     public List<Dish> getTodayMenu(@PathVariable int id) {
        return super.getTodayMenu(id);

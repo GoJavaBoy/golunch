@@ -3,7 +3,6 @@ package co.uk.golunch.repository;
 import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,5 @@
 package co.uk.golunch.to;
 
-import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.model.Vote;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class RestaurantTo {
