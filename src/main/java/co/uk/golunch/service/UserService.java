@@ -1,7 +1,7 @@
 package co.uk.golunch.service;
 
 import co.uk.golunch.model.User;
-import co.uk.golunch.repository.DataJpaUserRepository;
+import co.uk.golunch.repository.UserRepository;
 import co.uk.golunch.to.UserTo;
 import co.uk.golunch.util.UserUtil;
 import co.uk.golunch.web.AuthorizedUser;
@@ -26,10 +26,10 @@ import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService implements UserDetailsService {
 
-    private final DataJpaUserRepository repository;
+    private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(DataJpaUserRepository repository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -42,11 +42,11 @@ public class UserService implements UserDetailsService {
 
     @CacheEvict(cacheNames = {"users", "restaurants"}, allEntries = true)
     public void delete(int id) {
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(repository.delete(id) != 0, id);
     }
 
     public User get(int id) {
-        return checkNotFoundWithId(repository.get(id), id);
+        return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
     public User getByEmail(String email) {
@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService {
 
     @Cacheable("users")
     public List<User> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @CacheEvict(value = "users", allEntries = true)

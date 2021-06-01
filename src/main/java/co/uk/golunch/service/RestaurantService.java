@@ -3,8 +3,8 @@ package co.uk.golunch.service;
 import co.uk.golunch.model.Dish;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.model.Vote;
-import co.uk.golunch.repository.DataJpaRestaurantRepository;
 import co.uk.golunch.repository.MenuRepository;
+import co.uk.golunch.repository.RestaurantRepository;
 import co.uk.golunch.repository.VotesRepository;
 import co.uk.golunch.to.DishTo;
 import co.uk.golunch.to.RestaurantTo;
@@ -26,11 +26,12 @@ import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class RestaurantService {
 
-    private final DataJpaRestaurantRepository restaurantRepository;
+
+    private final RestaurantRepository restaurantRepository;
     private final MenuRepository menuRepository;
     private final VotesRepository votesRepository;
 
-    public RestaurantService(DataJpaRestaurantRepository restaurantRepository, MenuRepository menuRepository, VotesRepository votesRepository) {
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository, VotesRepository votesRepository) {
         this.restaurantRepository = restaurantRepository;
         this.menuRepository = menuRepository;
         this.votesRepository = votesRepository;
@@ -39,16 +40,16 @@ public class RestaurantService {
     @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public void delete(int id) {
-        checkNotFoundWithId(restaurantRepository.delete(id), id);
+        checkNotFoundWithId(restaurantRepository.delete(id) != 0, id);
     }
 
     @Cacheable("restaurants")
     public List<Restaurant> getAll() {
-        return restaurantRepository.getAll();
+        return restaurantRepository.findAll();
     }
 
     public RestaurantTo getWithMenuAndVotes(int id) {
-        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.findById(id).orElse(null), id);
         List<DishTo> menu = menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now()).stream()
                 .map(DishTo::new)
                 .collect(Collectors.toList());
@@ -60,18 +61,18 @@ public class RestaurantService {
     @Transactional
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        restaurantRepository.create(restaurant);
+        restaurantRepository.save(restaurant);
     }
 
     @CacheEvict(value = "restaurants", allEntries = true)
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        return restaurantRepository.create(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
     @Transactional
     public void addMenu(int id, DishTo... dishes) {
-        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.findById(id).orElse(null), id);
         Assert.notNull(dishes, "menu must not be null");
         if (dishes.length == 0) {
             throw new IllegalArgumentException("menu must not be empty");
@@ -83,7 +84,7 @@ public class RestaurantService {
     }
 
     public List<Dish> getTodayMenu(int id) {
-        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.get(id), id);
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.findById(id).orElse(null), id);
         return menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now());
     }
 

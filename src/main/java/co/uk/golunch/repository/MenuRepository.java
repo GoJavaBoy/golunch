@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public interface MenuRepository extends JpaRepository<Dish, Integer> {
+
     List<Dish> findAllByRestaurantAndDate(Restaurant restaurant, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date);
+
     Dish findByIdAndRestaurantId(int dishId, int resId);
 }
