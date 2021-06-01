@@ -34,13 +34,11 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return prepareAndSave(user);
     }
 
-    @CacheEvict(cacheNames = {"users", "restaurants"}, allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id) != 0, id);
     }
@@ -54,18 +52,15 @@ public class UserService implements UserDetailsService {
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
-    @Cacheable("users")
     public List<User> getAll() {
         return repository.findAll();
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         prepareAndSave(user);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Transactional
     public void update(UserTo userTo) {
         User user = get(userTo.id());
