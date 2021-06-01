@@ -29,8 +29,8 @@ public class RestaurantTestData {
     public static final Restaurant adminRestaurantHoniPoke = new Restaurant(ADMIN_RESTAURANT_HONI_POKE_ID, "Honi Poke");
 
     public static final List<DishTo> menu = Arrays.asList(
-            new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
             new DishTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
+            new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
             new DishTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
             new DishTo(new BigDecimal("1.99"), "Coca-ColaTS"),
             new DishTo(new BigDecimal("1.99"), "SpriteTS")
@@ -38,8 +38,8 @@ public class RestaurantTestData {
 
     static {
         List<DishTo> menu = Arrays.asList(
-                new DishTo(new BigDecimal("12.99"), "Chicken Burger", 100012),
                 new DishTo(new BigDecimal("10.99"), "Bacon Burger", 100013),
+                new DishTo(new BigDecimal("12.99"), "Chicken Burger", 100012),
                 new DishTo(new BigDecimal("3.50"), "Chicken Nugets", 100014),
                 new DishTo(new BigDecimal("1.99"), "Coca-Cola", 100015),
                 new DishTo(new BigDecimal("1.99"), "Sprite", 100016)

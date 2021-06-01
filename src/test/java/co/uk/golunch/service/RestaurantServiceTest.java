@@ -85,8 +85,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant created = restaurantService.create(restaurant); //Create Restaurant without menu
         assertTrue(restaurantService.getTodayMenu(created.getId()).isEmpty());
         restaurantService.addMenu(created.getId(),
-                new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
                 new DishTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
+                new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
                 new DishTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
                 new DishTo(new BigDecimal("1.99"), "Coca-ColaTS"),
                 new DishTo(new BigDecimal("1.99"), "SpriteTS")
