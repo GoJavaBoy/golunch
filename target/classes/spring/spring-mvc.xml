@@ -25,8 +25,8 @@
     </mvc:annotation-driven>
 
     <context:component-scan base-package="co.uk.golunch.**.web"/>
-    
-    <!-- use WebJars so Javascript and CSS libs can be declared as Maven dependencies (Bootstrap, jQuery...) -->
+
+    <!-- Need this for Swagger -->
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
     <!--  Swagger2  https://medium.com/@andreymamontov/swagger-2-configuration-with-spring-xml-3cd643a12425 -->
