@@ -36,23 +36,11 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @GetMapping
-    @Override
-    public List<Restaurant> getAll() {
-        return super.getAll();
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
     public void delete(@PathVariable int id) {
         super.delete(id);
-    }
-
-    @GetMapping("/{id}")
-    @Override
-    public RestaurantTo getWithMenuAndVotes(@PathVariable int id) {
-        return super.getWithMenuAndVotes(id);
     }
 
     @PostMapping("/{id}/menu")

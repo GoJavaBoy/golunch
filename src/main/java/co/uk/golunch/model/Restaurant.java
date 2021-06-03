@@ -12,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
 
-    public Restaurant(Restaurant restaurant){
+    public Restaurant(Restaurant restaurant) {
         this(restaurant.getId(), restaurant.getName());
     }
 
@@ -26,6 +26,4 @@ public class Restaurant extends AbstractNamedEntity {
 
     public Restaurant() {
     }
-
-
 }
