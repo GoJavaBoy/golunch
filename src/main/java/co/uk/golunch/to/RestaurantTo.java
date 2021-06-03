@@ -1,20 +1,29 @@
 package co.uk.golunch.to;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 public class RestaurantTo {
 
     private String name;
-    private List<DishTo> menu;
+    private List<MenuItemTo> menu;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer votes;
 
     public RestaurantTo() {
     }
 
-    public RestaurantTo(String name, List<DishTo> menu, Integer votes) {
+    public RestaurantTo(String name, List<MenuItemTo> menu, Integer votes) {
         this.name = name;
         this.menu = menu;
         this.votes = votes;
+    }
+
+    public RestaurantTo(String name, List<MenuItemTo> menu) {
+        this.name = name;
+        this.menu = menu;
     }
 
     public String getName() {
@@ -25,11 +34,11 @@ public class RestaurantTo {
         this.name = name;
     }
 
-    public List<DishTo> getMenu() {
+    public List<MenuItemTo> getMenu() {
         return menu;
     }
 
-    public void setMenu(List<DishTo> menu) {
+    public void setMenu(List<MenuItemTo> menu) {
         this.menu = menu;
     }
 

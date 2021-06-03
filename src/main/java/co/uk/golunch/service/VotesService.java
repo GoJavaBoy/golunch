@@ -9,9 +9,11 @@ import co.uk.golunch.repository.VotesRepository;
 import co.uk.golunch.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 import static co.uk.golunch.util.ValidationUtil.checkNotFoundWithId;
@@ -29,8 +31,8 @@ public class VotesService {
     }
 
     @Transactional
-    public void save(User user, int resId){
-        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.findById(resId).orElse(null), resId);
+    public void save(User user, int restaurantId){
+        Restaurant restaurant = checkNotFoundWithId(restaurantRepository.findById(restaurantId).orElse(null), restaurantId);
         if (menuRepository.findAllByRestaurantAndDate(restaurant, LocalDate.now()).isEmpty()){
             throw new NotFoundException("There no menu for this restaurant");
         }
@@ -40,5 +42,15 @@ public class VotesService {
         } else if (LocalTime.now().isBefore(LocalTime.parse("11:00"))){
             todayVote.get().setRestaurant(restaurant);
         }
+    }
+
+    public Vote getTodayVote(User user){
+        Assert.notNull(user, "user must not be null");
+        return votesRepository.getForUserAndDate(user.getId(), LocalDate.now()).orElse(null);
+    }
+
+    public List<Vote> getAllVotes(User user){
+        Assert.notNull(user, "user must not be null");
+        return votesRepository.findAllByUser(user.getId());
     }
 }

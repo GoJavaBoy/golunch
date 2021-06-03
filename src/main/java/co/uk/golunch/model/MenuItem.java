@@ -1,6 +1,6 @@
 package co.uk.golunch.model;
 
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -11,15 +11,15 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"}, name = "dish_name_idx")})
-public class Dish extends AbstractNamedEntity {
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"}, name = "menu_item_name_idx")})
+public class MenuItem extends AbstractNamedEntity {
 
     @NotNull
     @NumberFormat
     private BigDecimal price;
 
     @NotNull
-    @Column(name = "dish_add_date", nullable = false)
+    @Column(name = "menu_item_add_date", nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
@@ -28,30 +28,30 @@ public class Dish extends AbstractNamedEntity {
     @NotNull
     private Restaurant restaurant;
 
-    public Dish() {
+    public MenuItem() {
     }
 
-    public Dish(Integer id, String name, BigDecimal price, LocalDate date, Restaurant restaurant) {
+    public MenuItem(Integer id, String name, BigDecimal price, LocalDate date, Restaurant restaurant) {
         super(id, name);
         this.price = price;
         this.date = date;
         this.restaurant = restaurant;
     }
 
-    public Dish(DishTo dishTo, Restaurant restaurant) {
-        super(dishTo.getId(), dishTo.getName());
-        this.price = dishTo.getPrice();
+    public MenuItem(MenuItemTo menuItemTo, Restaurant restaurant) {
+        super(menuItemTo.getId(), menuItemTo.getName());
+        this.price = menuItemTo.getPrice();
         this.date = LocalDate.now();
         this.restaurant = restaurant;
     }
 
-    public Dish(Dish dish) {
-        this(dish.getId(), dish.getName(), dish.getPrice(), dish.getDate(), dish.getRestaurant());
+    public MenuItem(MenuItem menuItem) {
+        this(menuItem.getId(), menuItem.getName(), menuItem.getPrice(), menuItem.getDate(), menuItem.getRestaurant());
     }
 
-    public Dish(DishTo dishTo) {
-        super(dishTo.getId(), dishTo.getName());
-        this.price = dishTo.getPrice();
+    public MenuItem(MenuItemTo menuItemTo) {
+        super(menuItemTo.getId(), menuItemTo.getName());
+        this.price = menuItemTo.getPrice();
     }
 
     public String getName() {
@@ -88,7 +88,7 @@ public class Dish extends AbstractNamedEntity {
 
     @Override
     public String toString() {
-        return "Dish{" +
+        return "MenuItem{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';
@@ -98,8 +98,8 @@ public class Dish extends AbstractNamedEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dish dish = (Dish) o;
-        return Objects.equals(name, dish.name) && Objects.equals(price, dish.price);
+        MenuItem menuItem = (MenuItem) o;
+        return Objects.equals(name, menuItem.name) && Objects.equals(price, menuItem.price);
     }
 
     @Override

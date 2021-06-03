@@ -22,9 +22,17 @@ public class UserRestaurantRestController extends AbstractRestaurantController{
         return super.getAll();
     }
 
+    @GetMapping("/withMenu")
+    @Override
+    public List<RestaurantTo> getAllWithMenu() {
+        return super.getAllWithMenu();
+    }
+
     @GetMapping("/{id}")
     @Override
-    public RestaurantTo getWithMenuAndVotes(@PathVariable int id) {
-        return super.getWithMenuAndVotes(id);
+    public RestaurantTo getWithMenu(@PathVariable int id) {
+        return super.getWithMenu(id);
     }
+
+
 }

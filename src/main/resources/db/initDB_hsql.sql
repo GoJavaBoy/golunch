@@ -20,8 +20,8 @@ CREATE TABLE menu
     restaurant_id INTEGER         NOT NULL,
     name  VARCHAR(255)    NOT NULL,
     price DECIMAL(128, 2) NOT NULL,
-    dish_add_date DATE    NOT NULL,
-    CONSTRAINT dish_name_idx UNIQUE (restaurant_id, name, price, dish_add_date),
+    menu_item_add_date DATE    NOT NULL,
+    CONSTRAINT menu_item_name_idx UNIQUE (restaurant_id, menu_item_add_date, name),
     FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
 );
 

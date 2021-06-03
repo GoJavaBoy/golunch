@@ -1,11 +1,12 @@
 package co.uk.golunch.web.restaurant;
 
 import co.uk.golunch.RestaurantTestData;
-import co.uk.golunch.model.Dish;
+import co.uk.golunch.model.MenuItem;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.repository.MenuRepository;
+import co.uk.golunch.service.MenuService;
 import co.uk.golunch.service.RestaurantService;
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import co.uk.golunch.util.exception.NotFoundException;
 import co.uk.golunch.web.AbstractControllerTest;
 import co.uk.golunch.web.json.JsonUtil;
@@ -37,6 +38,9 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
     private RestaurantService service;
 
     @Autowired
+    private MenuService menuService;
+
+    @Autowired
     private MenuRepository menuRepository;
 
     @Test
@@ -46,7 +50,7 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(admin))
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().is2xxSuccessful());
         assertEquals(service.getWithMenuAndVotes(USER_RESTAURANT_FIVE_GUYS_ID).getName(), updated.getName());
     }
 
@@ -75,25 +79,6 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_TO_MATCHER.contentJson(userRestaurantToFiveGuys));
-    }
-
-    @Test
-    void getNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + NOT_FOUND)
-                .with(userHttpBasic(admin)))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
-    }
-
-    @Test
-    void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL)
-                .with(userHttpBasic(admin)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(RESTAURANT_MATCHER.contentJson(userRestaurantFiveGuys, userRestaurantAbsurdBird, adminRestaurantHoniPoke,
-                        userRestaurantRosaThai, userRestaurantEatActive
-                ));
     }
 
     @Test
@@ -157,14 +142,14 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
     void addMenu() throws Exception {
         Restaurant restaurant = new Restaurant("Restaurant Without Menu");
         Restaurant created = service.create(restaurant); //Create Restaurant without menu
-        assertTrue(service.getTodayMenu(created.getId()).isEmpty());
+        assertTrue(menuService.getTodayMenu(created.getId()).isEmpty());
         perform(MockMvcRequestBuilders.post(REST_URL + created.getId() + "/menu")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(JsonUtil.writeValue(menu)))
                 .andExpect(status().isCreated());
-        List<DishTo> createdMenu = toDishTo(service.getTodayMenu(created.getId()));
-        DISH_TO_MATCHER.assertMatch(createdMenu, menu);
+        List<MenuItemTo> createdMenu = toMenuItemTo(menuService.getTodayMenu(created.getId()));
+        MENU_ITEM_TO_MATCHER.assertMatch(createdMenu, menu);
     }
 
     @Test
@@ -175,24 +160,24 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(DISH_MATCHER.contentJson(toDish(userRestaurantToFiveGuys.getMenu())));
+                .andExpect(MENU_ITEM_MATCHER.contentJson(toMenuItem(userRestaurantToFiveGuys.getMenu())));
     }
 
     @Test
-    void updateDish() throws Exception {
-        DishTo updatedDish = new DishTo(new BigDecimal("12.99"), "Updated Chicken Burger", 100012);
-        perform(MockMvcRequestBuilders.put(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID+"/menu")
+    void updateMenuItem() throws Exception {
+        MenuItemTo updatedMenuItem = new MenuItemTo(new BigDecimal("12.99"), "Updated Chicken Burger", 100012);
+        perform(MockMvcRequestBuilders.put(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID+"/menu/100012")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
-                .content(JsonUtil.writeValue(updatedDish)))
+                .content(JsonUtil.writeValue(updatedMenuItem)))
                 .andDo(print())
-                .andExpect(status().isNoContent());
-        Dish dish = menuRepository.findById(100012).get();
-        DISH_TO_MATCHER.assertMatch(toDishTo(dish), updatedDish);
+                .andExpect(status().is2xxSuccessful());
+        MenuItem menuItem = menuRepository.findById(100012).get();
+        MENU_ITEM_TO_MATCHER.assertMatch(toMenuItemTo(menuItem), updatedMenuItem);
     }
 
     @Test
-    void deleteDish() throws Exception {
+    void deleteMenuItem() throws Exception {
         perform(MockMvcRequestBuilders.delete(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID+"/menu/"+100012)
                 .with(userHttpBasic(admin)))
                 .andDo(print())

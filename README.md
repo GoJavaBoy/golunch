@@ -6,7 +6,7 @@ ____
 GoLunch is voting system for deciding where to have lunch.
 
 - 2 types of users: admin and regular users 
-- Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish name and price)
+- Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a menuItem name and price)
 - Users can vote on which restaurant they want to have lunch at
 - Only one vote counted per user
 - If user votes again the same day:

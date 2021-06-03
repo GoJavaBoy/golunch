@@ -2,10 +2,11 @@ package co.uk.golunch.service;
 
 
 import co.uk.golunch.RestaurantTestData;
-import co.uk.golunch.model.Dish;
+import co.uk.golunch.TestUtil;
+import co.uk.golunch.model.MenuItem;
 import co.uk.golunch.model.Restaurant;
 import co.uk.golunch.repository.MenuRepository;
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import co.uk.golunch.to.RestaurantTo;
 import co.uk.golunch.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static co.uk.golunch.RestaurantTestData.*;
-import static co.uk.golunch.TestUtil.toDishTo;
+import static co.uk.golunch.TestUtil.toMenuItemTo;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -25,6 +26,9 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private MenuService menuService;
 
     @Autowired
     private MenuRepository menuRepository;
@@ -83,36 +87,36 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     void addMenu() {
         Restaurant restaurant = new Restaurant("Restaurant Without Menu");
         Restaurant created = restaurantService.create(restaurant); //Create Restaurant without menu
-        assertTrue(restaurantService.getTodayMenu(created.getId()).isEmpty());
-        restaurantService.addMenu(created.getId(),
-                new DishTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
-                new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
-                new DishTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
-                new DishTo(new BigDecimal("1.99"), "Coca-ColaTS"),
-                new DishTo(new BigDecimal("1.99"), "SpriteTS")
+        assertTrue(menuService.getTodayMenu(created.getId()).isEmpty());
+        menuService.addMenu(created.getId(),
+                new MenuItemTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
+                new MenuItemTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
+                new MenuItemTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
+                new MenuItemTo(new BigDecimal("1.99"), "Coca-ColaTS"),
+                new MenuItemTo(new BigDecimal("1.99"), "SpriteTS")
         );
-        List<DishTo> createdMenu = toDishTo(restaurantService.getTodayMenu(created.getId()));
-        DISH_TO_MATCHER.assertMatch(createdMenu, menu);
+        List<MenuItemTo> createdMenu = TestUtil.toMenuItemTo(menuService.getTodayMenu(created.getId()));
+        MENU_ITEM_TO_MATCHER.assertMatch(createdMenu, menu);
     }
 
     @Test
     void getTodayMenu() {
-        List<Dish> menu = restaurantService.getTodayMenu(USER_RESTAURANT_FIVE_GUYS_ID);
-        List<DishTo> menuTo = toDishTo(menu);
-        DISH_TO_MATCHER.assertMatch(menuTo, userRestaurantToFiveGuys.getMenu());
+        List<MenuItem> menu = menuService.getTodayMenu(USER_RESTAURANT_FIVE_GUYS_ID);
+        List<MenuItemTo> menuTo = TestUtil.toMenuItemTo(menu);
+        MENU_ITEM_TO_MATCHER.assertMatch(menuTo, userRestaurantToFiveGuys.getMenu());
     }
 
     @Test
-    void updateDish() {
-        DishTo updatedDish = new DishTo(new BigDecimal("12.99"), "Updated Chicken Burger", 100012);
-        restaurantService.updateDish(USER_RESTAURANT_FIVE_GUYS_ID, updatedDish);
-        Dish dish = menuRepository.findById(100012).get();
-        DISH_TO_MATCHER.assertMatch(toDishTo(dish), updatedDish);
+    void updateMenuItem() {
+        MenuItemTo updatedMenuItem = new MenuItemTo(new BigDecimal("12.99"), "Updated Chicken Burger", 100012);
+        menuService.updateMenuItem(USER_RESTAURANT_FIVE_GUYS_ID, updatedMenuItem);
+        MenuItem menuItem = menuRepository.findById(100012).get();
+        MENU_ITEM_TO_MATCHER.assertMatch(toMenuItemTo(menuItem), updatedMenuItem);
     }
 
     @Test
-    void deleteDish() {
-        restaurantService.deleteDish(USER_RESTAURANT_FIVE_GUYS_ID, 100012);
+    void deleteMenuItem() {
+        menuService.deleteMenuItem(USER_RESTAURANT_FIVE_GUYS_ID, 100012);
         assertThrows(NoSuchElementException.class, () -> menuRepository.findById(100012).get());
     }
 }

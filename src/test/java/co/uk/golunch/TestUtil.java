@@ -1,8 +1,8 @@
 package co.uk.golunch;
 
-import co.uk.golunch.model.Dish;
+import co.uk.golunch.model.MenuItem;
 import co.uk.golunch.model.User;
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import co.uk.golunch.web.AuthorizedUser;
 import co.uk.golunch.web.json.JsonUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,23 +46,23 @@ public class TestUtil {
         return SecurityMockMvcRequestPostProcessors.authentication(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
     }
 
-    public static List<DishTo> toDishTo(List<Dish> dishes){
-        return dishes.stream()
-                .map(DishTo::new)
+    public static List<MenuItemTo> toMenuItemTo(List<MenuItem> menuItems){
+        return menuItems.stream()
+                .map(MenuItemTo::new)
                 .collect(Collectors.toList());
     }
 
-    public static List<Dish> toDish(List<DishTo> dishes){
-        return dishes.stream()
-                .map(Dish::new)
+    public static List<MenuItem> toMenuItem(List<MenuItemTo> menuItemTos){
+        return menuItemTos.stream()
+                .map(MenuItem::new)
                 .collect(Collectors.toList());
     }
 
-    public static DishTo toDishTo(Dish dish){
-        return new DishTo(dish);
+    public static MenuItemTo toMenuItemTo(MenuItem menuItem){
+        return new MenuItemTo(menuItem);
     }
 
-    public static Dish toDish(DishTo dishTo){
-        return new Dish(dishTo);
+    public static MenuItem toMenuItem(MenuItemTo menuItemTo){
+        return new MenuItem(menuItemTo);
     }
 }

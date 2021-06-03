@@ -31,7 +31,7 @@ VALUES ('USER', 100005),
        ('USER', 100010),
        ('USER', 100011);
 
-INSERT INTO menu (restaurant_id, name, price, dish_add_date )
+INSERT INTO menu (restaurant_id, name, price, menu_item_add_date )
 VALUES (100000, 'Chicken Burger', 12.99, NOW()),
        (100000, 'Bacon Burger', 10.99, NOW()),
        (100000, 'Chicken Nugets', 3.50, NOW()),

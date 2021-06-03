@@ -1,8 +1,8 @@
 package co.uk.golunch;
 
-import co.uk.golunch.model.Dish;
+import co.uk.golunch.model.MenuItem;
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import co.uk.golunch.to.RestaurantTo;
 
 import java.math.BigDecimal;
@@ -13,9 +13,9 @@ import static co.uk.golunch.model.AbstractBaseEntity.START_SEQ;
 
 public class RestaurantTestData {
     public static final TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Restaurant.class);
-    public static final TestMatcher<RestaurantTo> RESTAURANT_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(RestaurantTo.class);
-    public static final TestMatcher<DishTo> DISH_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(DishTo.class, "id");
-    public static final TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Dish.class, "date", "restaurant");
+    public static final TestMatcher<RestaurantTo> RESTAURANT_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(RestaurantTo.class, "votes");
+    public static final TestMatcher<MenuItemTo> MENU_ITEM_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(MenuItemTo.class, "id");
+    public static final TestMatcher<MenuItem> MENU_ITEM_MATCHER = TestMatcher.usingIgnoringFieldsComparator(MenuItem.class, "date", "restaurant");
 
     public static final int NOT_FOUND = 10;
     public static final int USER_RESTAURANT_FIVE_GUYS_ID = START_SEQ;
@@ -28,21 +28,21 @@ public class RestaurantTestData {
     public static final Restaurant userRestaurantEatActive = new Restaurant(START_SEQ + 4, "Eat Active");
     public static final Restaurant adminRestaurantHoniPoke = new Restaurant(ADMIN_RESTAURANT_HONI_POKE_ID, "Honi Poke");
 
-    public static final List<DishTo> menu = Arrays.asList(
-            new DishTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
-            new DishTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
-            new DishTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
-            new DishTo(new BigDecimal("1.99"), "Coca-ColaTS"),
-            new DishTo(new BigDecimal("1.99"), "SpriteTS")
+    public static final List<MenuItemTo> menu = Arrays.asList(
+            new MenuItemTo(new BigDecimal("10.99"), "Bacon BurgerTS"),
+            new MenuItemTo(new BigDecimal("12.99"), "Chicken BurgerTS"),
+            new MenuItemTo(new BigDecimal("3.50"), "Chicken NugetsTS"),
+            new MenuItemTo(new BigDecimal("1.99"), "Coca-ColaTS"),
+            new MenuItemTo(new BigDecimal("1.99"), "SpriteTS")
     );
 
     static {
-        List<DishTo> menu = Arrays.asList(
-                new DishTo(new BigDecimal("10.99"), "Bacon Burger", 100013),
-                new DishTo(new BigDecimal("12.99"), "Chicken Burger", 100012),
-                new DishTo(new BigDecimal("3.50"), "Chicken Nugets", 100014),
-                new DishTo(new BigDecimal("1.99"), "Coca-Cola", 100015),
-                new DishTo(new BigDecimal("1.99"), "Sprite", 100016)
+        List<MenuItemTo> menu = Arrays.asList(
+                new MenuItemTo(new BigDecimal("10.99"), "Bacon Burger", 100013),
+                new MenuItemTo(new BigDecimal("12.99"), "Chicken Burger", 100012),
+                new MenuItemTo(new BigDecimal("3.50"), "Chicken Nugets", 100014),
+                new MenuItemTo(new BigDecimal("1.99"), "Coca-Cola", 100015),
+                new MenuItemTo(new BigDecimal("1.99"), "Sprite", 100016)
         );
         userRestaurantToFiveGuys.setName(userRestaurantFiveGuys.getName());
         userRestaurantToFiveGuys.setVotes(3);

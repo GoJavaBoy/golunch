@@ -18,6 +18,8 @@ public interface VotesRepository extends JpaRepository<Vote, Integer> {
     Optional<Vote> getForUserAndDate(@Param("userId") Integer userId, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Param("date") LocalDate date);
 
     @Query("SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId AND v.date=:date")
-    List<Vote> findAllByRestaurantAndAndDate(@Param("restaurantId") Integer restaurantId, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Param("date") LocalDate date);
+    List<Vote> findAllByRestaurantAndDate(@Param("restaurantId") Integer restaurantId, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Param("date") LocalDate date);
 
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId")
+    List<Vote> findAllByUser(@Param("userId") Integer userId);
 }

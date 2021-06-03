@@ -88,7 +88,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
                 .content(jsonWithPassword(updated, "updatedPas")))
-                .andExpect(status().isNoContent());
+                .andExpect(status().is2xxSuccessful());
 
         USER_MATCHER.assertMatch(userService.get(USER_ID), updated);
     }

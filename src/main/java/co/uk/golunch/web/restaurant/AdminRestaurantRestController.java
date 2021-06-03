@@ -1,8 +1,8 @@
 package co.uk.golunch.web.restaurant;
 
-import co.uk.golunch.model.Dish;
+import co.uk.golunch.model.MenuItem;
 import co.uk.golunch.model.Restaurant;
-import co.uk.golunch.to.DishTo;
+import co.uk.golunch.to.MenuItemTo;
 import co.uk.golunch.to.RestaurantTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,53 +20,32 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
 
     static final String REST_URL = "/admin/restaurants";
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{restaurantId}")
+    @ResponseStatus(HttpStatus.OK)
     @Override
-    public void update(@PathVariable int id, @RequestBody @Valid Restaurant restaurant) {
-        super.update(id, restaurant);
+    public void update(@PathVariable int restaurantId, @RequestBody @Valid Restaurant restaurant) {
+        super.update(restaurantId, restaurant);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody @Valid Restaurant restaurant) {
         Restaurant created = super.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL + "/{restaurantId}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/{restaurantId}")
+    @Override
+    public RestaurantTo getWithMenuAndVotes(@PathVariable int restaurantId) {
+        return super.getWithMenuAndVotes(restaurantId);
+    }
+
+    @DeleteMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
-    public void delete(@PathVariable int id) {
-        super.delete(id);
-    }
-
-    @PostMapping("/{id}/menu")
-    @ResponseStatus(HttpStatus.CREATED)
-    @Override
-    public void addMenu(@PathVariable int id, @RequestBody @Valid DishTo... menu) {
-        super.addMenu(id, menu);
-    }
-
-    @GetMapping("/{id}/menu")
-    @Override
-    public List<Dish> getTodayMenu(@PathVariable int id) {
-       return super.getTodayMenu(id);
-    }
-
-    @PutMapping("/{id}/menu")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Override
-    public void updateDish(@PathVariable int id, @RequestBody @Valid DishTo dishTo){
-        super.updateDish(id, dishTo);
-    }
-
-    @DeleteMapping("/{id}/menu/{dishId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Override
-    public void deleteDish(@PathVariable int id, @PathVariable int dishId){
-        super.deleteDish(id, dishId);
+    public void delete(@PathVariable int restaurantId) {
+        super.delete(restaurantId);
     }
 }

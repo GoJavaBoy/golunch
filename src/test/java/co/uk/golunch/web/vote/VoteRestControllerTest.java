@@ -14,7 +14,7 @@ import static co.uk.golunch.UserTestData.user4;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class VoteControllerTest extends AbstractControllerTest {
+class VoteRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = "/vote/";
 
@@ -26,7 +26,7 @@ class VoteControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.post(REST_URL + USER_RESTAURANT_FIVE_GUYS_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user4)))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isCreated());
         RestaurantTo restaurant = restaurantService.getWithMenuAndVotes(USER_RESTAURANT_FIVE_GUYS_ID);
         assertEquals((int) restaurant.getVotes(), 4);
     }
