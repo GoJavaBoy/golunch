@@ -22,6 +22,15 @@ ____
 
 Use Swagger UI to test it **_/swagger-ui.html_**
 
+_Credentials for testing:_
+- admin@gmail.com - admin
+- user@yandex.ru - password
+- user1@yandex.ru - password
+- user2@yandex.ru - password
+- user3@yandex.ru - password
+- user4@yandex.ru - password
+- user5@yandex.ru - password
+
 
 
 
